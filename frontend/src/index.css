@@ -1,0 +1,98 @@
+:root {
+  /* Tipografia */
+  --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --line-height: 1.5;
+
+  /* Paleta atualizada (fornecida):
+    #be5838, #411717, #532b2a, #678b64, #573c2c, #6a8e67, #e77b5b, #e96b46, #fbc046
+  */
+  --color-primary: #532b2a; /* marrom profundo */
+  --color-primary-dark: #411717;
+  --color-accent: #be5838;
+  --color-secondary: #678b64; /* verde musgo */
+  --color-brown-warm: #573c2c;
+  --color-green-soft: #6a8e67;
+  --color-orange-soft: #e77b5b;
+  --color-orange-strong: #e96b46;
+  --color-highlight: #fbc046; /* CTA */
+  --color-text: #2E2E2E;
+  --color-muted: #6B6B6B;
+  --color-background: #faf5f1; /* fundo solicitado */
+
+  font-family: var(--font-sans);
+  line-height: var(--line-height);
+  font-weight: 400;
+
+  color-scheme: light;
+  color: var(--color-text);
+  background-color: var(--color-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+h1 {
+  font-size: 2.4rem;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.0em;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  background-color: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+button:hover {
+  transform: translateY(-2px);
+}
+button:focus,
+button:focus-visible {
+  outline: 3px solid rgba(0,0,0,0.08);
+}
+
+/* Helper for boxed cards and rounded ninho effect */
+.card {
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: var(--color-background);
+  }
+  a:hover {
+    color: var(--color-primary-dark);
+  }
+  button {
+    background-color: var(--color-primary);
+  }
+}
