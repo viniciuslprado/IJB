@@ -1,13 +1,7 @@
 import React from 'react'
 import { theme } from '../styles/theme'
 import { Link } from 'react-router-dom'
-
-const footerStyle: React.CSSProperties = {
-  background: theme.colors.primaryDark || theme.colors.primary,
-  color: '#fff',
-  padding: '40px 20px',
-  marginTop: 60
-}
+import { FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa'
 
 const colStyle: React.CSSProperties = {
   display: 'flex',
@@ -17,7 +11,14 @@ const colStyle: React.CSSProperties = {
 
 const Footer: React.FC = () => {
   return (
-    <footer style={footerStyle}>
+    <footer style={{
+      background: theme.colors.primary,
+      color: '#fff',
+      marginTop: 60,
+      paddingTop: 60,
+      paddingBottom: 20,
+      borderTop: `4px solid ${theme.colors.accent}`
+    }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20, alignItems: 'start' }}>
         <div style={colStyle}>
           <div style={{ fontWeight: 800, color: '#fff' }}>Instituto João de Barros</div>
@@ -40,11 +41,42 @@ const Footer: React.FC = () => {
 
         <div style={colStyle}>
           <div style={{ fontWeight: 700, color: '#fff' }}>Contato</div>
-          <div style={{ color: '#fff' }}>Telefone: (16) 99181-1811</div>
-          <div style={{ color: '#fff' }}>Email: <a href="mailto:ijbfranca@gmail.com" style={{ color: '#fff', textDecoration: 'none' }}>ijbfranca@gmail.com</a></div>
-          <div style={{ marginTop: 6 }}>
-            <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>Instagram: @instituto_joaodebarro_franca</a>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff' }}>
+            <FaPhone size={14} /> <span>(16) 99181-1811</span>
           </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff' }}>
+            <FaEnvelope size={14} /> 
+            <a href="mailto:ijbfranca@gmail.com" style={{ color: '#fff', textDecoration: 'none' }}>ijbfranca@gmail.com</a>
+          </div>
+
+          <div style={{ marginTop: 12 }}>
+            <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer" style={{ color: '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <FaInstagram size={18} /> 
+              <span>@instituto_joaodebarro_franca</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      {/* RODAPÉ INFERIOR: Copyright & CNPJ */}
+      <div style={{ 
+        maxWidth: 1100, 
+        margin: '40px auto 0', 
+        padding: '20px 20px 0', 
+        borderTop: '1px solid rgba(255,255,255,0.1)',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: 16,
+        fontSize: 13,
+        color: 'rgba(255,255,255,0.5)'
+      }}>
+        <div>
+          © {new Date().getFullYear()} Instituto João de Barros. Todos os direitos reservados.
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span>CNPJ:</span>
+          <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 14 }}>26.345.732/0001-07</span>
         </div>
       </div>
     </footer>

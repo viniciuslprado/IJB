@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import { theme } from '../styles/theme'
 import Carousel from '../components/ui/Carousel'
 import { FaWhatsapp, FaEnvelope } from 'react-icons/fa'
@@ -38,6 +39,10 @@ const ProjectRow: React.FC<{
 const Projetos: React.FC = () => {
   return (
     <main style={{ padding: '40px 20px', maxWidth: 1100, margin: '0 auto' }}>
+      <Helmet>
+        <title>Nossos Projetos | Instituto João de Barros</title>
+        <meta name="description" content="Veja as obras e reformas realizadas pelo Instituto João de Barros para famílias em Franca-SP." />
+      </Helmet>
       <section style={{ textAlign: 'center', marginBottom: 60 }}>
         <h1 style={{ color: theme.colors.primary, fontSize: '3rem' }}>Nossos Projetos</h1>
         <p style={{ maxWidth: 700, margin: '0 auto', color: theme.colors.text, fontSize: '1.1rem' }}>

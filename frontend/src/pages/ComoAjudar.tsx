@@ -3,63 +3,135 @@ import { Helmet } from 'react-helmet-async'
 import emailjs from '@emailjs/browser'
 import { useSearchParams } from 'react-router-dom'
 import { theme } from '../styles/theme'
-import { FaHandHoldingUsd, FaTools, FaHandsHelping } from 'react-icons/fa'
-// DonationModal kept in codebase but not used here anymore
+import { FaHandHoldingUsd, FaTools, FaHandsHelping, FaCopy, FaCheckCircle, FaWhatsapp, FaUniversity } from 'react-icons/fa'
 
-
-
-const MaterialInfo: React.FC = () => (
-  <div style={{ background: '#fff', padding: 18, borderRadius: theme.radii.soft, maxWidth: 720 }}>
-    <h3 style={{ color: theme.colors.primary }}>Doação de Materiais</h3>
-    <p style={{ color: theme.colors.text }}>
-      Entregue materiais no Instituto João de Barros — Franca, SP
-      <br />Telefone: (16) 99181-1811
-      <br />Email: ijbfranca@gmail.com
-    </p>
-  </div>
+// --- Subcomponentes de UI (Inputs) ---
+const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
+  <input
+    {...props}
+    style={{
+      width: '100%',
+      padding: '12px 16px',
+      borderRadius: 8,
+      border: '1px solid #ddd',
+      fontSize: '16px',
+      outlineColor: theme.colors.primary,
+      marginTop: 6
+    }}
+  />
 )
+
+const TextArea = (props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) => (
+  <textarea
+    {...props}
+    style={{
+      width: '100%',
+      padding: '12px 16px',
+      borderRadius: 8,
+      border: '1px solid #ddd',
+      fontSize: '16px',
+      outlineColor: theme.colors.primary,
+      minHeight: 100,
+      marginTop: 6,
+      resize: 'vertical'
+    }}
+  />
+)
+
+// --- Copy Button Helper (replaces alert-based copy buttons) ---
+const CopyButton: React.FC<{ textToCopy: string, label?: string }> = ({ textToCopy, label = 'Copiar' }) => {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(textToCopy)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <button
+      onClick={handleCopy}
+      style={{
+        marginLeft: 8,
+        padding: '4px 10px',
+        borderRadius: 6,
+        border: 'none',
+        background: copied ? '#4CAF50' : '#eee',
+        color: copied ? '#fff' : theme.colors.text,
+        cursor: 'pointer',
+        fontWeight: 700,
+        fontSize: 12,
+        transition: 'background 0.2s'
+      }}
+    >
+      {copied ? 'Copiado!' : label}
+    </button>
+  )
+}
+
+// --- Formulários ---
 
 const MaterialForm: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
   const [name, setName] = useState('')
   const [contact, setContact] = useState('')
   const [materials, setMaterials] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const payload = { name, contact, materials, createdAt: new Date().toISOString() }
-    const existing = JSON.parse(localStorage.getItem('materialDonations') || '[]')
-    existing.push(payload)
-    localStorage.setItem('materialDonations', JSON.stringify(existing))
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      if (onClose) onClose()
-    }, 1400)
-    setName('')
-    setContact('')
-    setMaterials('')
+    setStatus('sending')
+
+    // Configure as suas chaves do EmailJS ou variáveis de ambiente aqui
+    const serviceId = 'SEU_SERVICE_ID'
+    const templateId = 'SEU_TEMPLATE_ID'
+    const publicKey = 'SUA_PUBLIC_KEY'
+
+    const templateParams = { from_name: name, contact_info: contact, message: materials, type: 'Material' }
+
+    emailjs.send(serviceId, templateId, templateParams, publicKey)
+      .then(() => {
+        setStatus('success')
+        setTimeout(() => {
+          if (onClose) onClose()
+          setStatus('idle')
+        }, 3000)
+      })
+      .catch((err) => {
+        console.error(err)
+        setStatus('error')
+      })
+  }
+
+  if (status === 'success') {
+    return (
+      <div style={{ textAlign: 'center', padding: 40 }}>
+        <FaCheckCircle size={50} color={theme.colors.secondary} />
+        <h3 style={{ color: theme.colors.primary }}>Obrigado pela doação!</h3>
+        <p>Entraremos em contacto em breve para combinar a recolha.</p>
+      </div>
+    )
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ background: '#fff', padding: 18, borderRadius: theme.radii.soft, maxWidth: 720, marginTop: 12 }}>
-      <h3 style={{ color: theme.colors.primary }}>Ficha de Doação de Materiais</h3>
-      <div style={{ display: 'grid', gap: 8 }}>
-        <label>
-          Nome completo
-          <input value={name} onChange={(e) => setName(e.target.value)} required style={{ width: '100%', padding: 8, marginTop: 4 }} />
-        </label>
-        <label>
-          Contato (telefone ou email)
-          <input value={contact} onChange={(e) => setContact(e.target.value)} required style={{ width: '100%', padding: 8, marginTop: 4 }} />
-        </label>
-        <label>
-          Materiais e quantidades (ex: 10 sacos de cimento)
-          <textarea value={materials} onChange={(e) => setMaterials(e.target.value)} required style={{ width: '100%', padding: 8, marginTop: 4 }} />
-        </label>
-        <div style={{ textAlign: 'right' }}>
-          <button type="submit" style={{ padding: '10px 14px', borderRadius: 8, background: theme.colors.primary, color: '#fff', border: 'none', fontWeight: 700 }}>{submitted ? 'Enviado' : 'Enviar ficha'}</button>
-        </div>
+    <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
+      <div>
+        <label style={{ fontWeight: 600, color: theme.colors.text }}>Nome completo</label>
+        <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Seu nome" disabled={status === 'sending'} />
+      </div>
+      <div>
+        <label style={{ fontWeight: 600, color: theme.colors.text }}>Contato</label>
+        <Input value={contact} onChange={(e) => setContact(e.target.value)} required placeholder="WhatsApp ou Email" disabled={status === 'sending'} />
+      </div>
+      <div>
+        <label style={{ fontWeight: 600, color: theme.colors.text }}>O que gostaria de doar?</label>
+        <TextArea value={materials} onChange={(e) => setMaterials(e.target.value)} required placeholder="Ex: 5 sacos de cimento, sobras de piso..." disabled={status === 'sending'} />
+      </div>
+      
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginTop: 8 }}>
+        <button type="button" onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: theme.colors.muted }}>Cancelar</button>
+        <button type="submit" disabled={status === 'sending'} style={{ padding: '10px 24px', borderRadius: 8, background: theme.colors.orangeStrong, color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer', opacity: status === 'sending' ? 0.7 : 1 }}>
+          {status === 'sending' ? 'Enviando...' : 'Confirmar Doação'}
+        </button>
       </div>
     </form>
   )
@@ -75,217 +147,224 @@ const VoluntarioForm: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
     e.preventDefault()
     setStatus('sending')
 
-    // Prefer reading IDs from environment variables to avoid committing secrets.
-    // Create a `.env` file in `frontend/` with:
-    // VITE_EMAILJS_SERVICE_ID=your_service_id
-    // VITE_EMAILJS_TEMPLATE_ID=your_template_id
-    // VITE_EMAILJS_PUBLIC_KEY=your_public_key
-    const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string) || 'SEU_SERVICE_ID'
-    const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string) || 'SEU_TEMPLATE_ID'
-    const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string) || 'SUA_PUBLIC_KEY'
-
-    const templateParams = {
-      from_name: name,
-      contact_info: contact,
-      message: skills
-    }
+    const serviceId = 'SEU_SERVICE_ID'
+    const templateId = 'SEU_TEMPLATE_ID'
+    const publicKey = 'SUA_PUBLIC_KEY'
+    const templateParams = { from_name: name, contact_info: contact, message: skills, type: 'Voluntário' }
 
     emailjs.send(serviceId, templateId, templateParams, publicKey)
       .then(() => {
         setStatus('success')
-        setName('')
-        setContact('')
-        setSkills('')
         setTimeout(() => {
-          setStatus('idle')
           if (onClose) onClose()
+          setStatus('idle')
         }, 3000)
       })
-      .catch((error) => {
-        console.error('Erro ao enviar:', error)
+      .catch((err) => {
+        console.error(err)
         setStatus('error')
       })
   }
 
-  return (
-    <form onSubmit={handleSubmit} style={{ background: '#fff', padding: 18, borderRadius: theme.radii.soft, maxWidth: 720, marginTop: 12 }}>
-      <h3 style={{ color: theme.colors.primary }}>Formulário de Voluntariado</h3>
-      <div style={{ display: 'grid', gap: 8 }}>
-        <label>
-          Nome completo
-          <input value={name} onChange={(e) => setName(e.target.value)} required disabled={status === 'sending'} style={{ width: '100%', padding: 8, marginTop: 4 }} />
-        </label>
-        <label>
-          Contato (telefone ou email)
-          <input value={contact} onChange={(e) => setContact(e.target.value)} required disabled={status === 'sending'} style={{ width: '100%', padding: 8, marginTop: 4 }} />
-        </label>
-        <label>
-          Em que pode ajudar?
-          <textarea value={skills} onChange={(e) => setSkills(e.target.value)} required disabled={status === 'sending'} style={{ width: '100%', padding: 8, marginTop: 4 }} />
-        </label>
-        
-        {status === 'error' && <p style={{ color: 'red' }}>Erro ao enviar. Por favor, tente novamente ou contacte-nos por telefone.</p>}
-        {status === 'success' && <p style={{ color: 'green' }}>Obrigado! A sua ficha foi enviada com sucesso.</p>}
+  if (status === 'success') {
+    return (
+      <div style={{ textAlign: 'center', padding: 40 }}>
+        <FaCheckCircle size={50} color={theme.colors.secondary} />
+        <h3 style={{ color: theme.colors.primary }}>Bem-vindo à equipe!</h3>
+        <p>Obrigado pelo interesse. Entraremos em contacto em breve.</p>
+      </div>
+    )
+  }
 
-        <div style={{ textAlign: 'right' }}>
-          <button type="submit" disabled={status === 'sending' || status === 'success'} style={{ padding: '10px 14px', borderRadius: 8, background: theme.colors.primary, color: '#fff', border: 'none', fontWeight: 700, opacity: status === 'sending' ? 0.7 : 1 }}>
-            {status === 'sending' ? 'A enviar...' : 'Enviar'}
-          </button>
-        </div>
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
+      <div>
+        <label style={{ fontWeight: 600, color: theme.colors.text }}>Nome completo</label>
+        <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Seu nome" disabled={status === 'sending'} />
+      </div>
+      <div>
+        <label style={{ fontWeight: 600, color: theme.colors.text }}>Contato</label>
+        <Input value={contact} onChange={(e) => setContact(e.target.value)} required placeholder="WhatsApp ou Email" disabled={status === 'sending'} />
+      </div>
+      <div>
+        <label style={{ fontWeight: 600, color: theme.colors.text }}>Como pode ajudar?</label>
+        <TextArea value={skills} onChange={(e) => setSkills(e.target.value)} required placeholder="Ex: Sou pedreiro, pintor, engenheiro, posso ajudar na limpeza..." disabled={status === 'sending'} />
+      </div>
+      
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginTop: 8 }}>
+        <button type="button" onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: theme.colors.muted }}>Cancelar</button>
+        <button type="submit" disabled={status === 'sending'} style={{ padding: '10px 24px', borderRadius: 8, background: theme.colors.secondary, color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer', opacity: status === 'sending' ? 0.7 : 1 }}>
+          {status === 'sending' ? 'Enviando...' : 'Enviar Cadastro'}
+        </button>
       </div>
     </form>
   )
 }
+
+// --- Página Principal ---
+
 const ComoAjudar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<'financeiro' | 'material' | 'voluntario' | null>(null)
   const [searchParams] = useSearchParams()
-  const financialRef = useRef<HTMLDivElement | null>(null)
-  const materialRef = useRef<HTMLDivElement | null>(null)
-  const volunteerRef = useRef<HTMLDivElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const t = searchParams.get('type')
     if (t) {
-      if (t === 'voluntario' || t === 'voluntário') {
-        setActiveSection('voluntario')
-        setTimeout(() => volunteerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80)
-      } else if (t === 'material') {
-        setActiveSection('material')
-        setTimeout(() => materialRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80)
-      } else if (t === 'dinheiro' || t === 'financeiro') {
-        setActiveSection('financeiro')
-        setTimeout(() => financialRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80)
-      }
+      if (t.includes('volunt')) setActiveSection('voluntario')
+      else if (t.includes('mat')) setActiveSection('material')
+      else if (t.includes('din') || t.includes('fin')) setActiveSection('financeiro')
+      
+      setTimeout(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300)
     }
   }, [searchParams])
 
-  const toggleSection = (section: 'financeiro' | 'material' | 'voluntario') => {
-    setActiveSection((s) => (s === section ? null : section))
-    // scroll to the target after opening
-    setTimeout(() => {
-      if (section === 'financeiro') financialRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      if (section === 'material') materialRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 120)
-  }
+  const pixKey = "26.345.732/0001-07"
+
+  // Note: copy buttons now use `CopyButton` which shows temporary feedback instead of alert()
 
   return (
     <>
       <Helmet>
         <title>Como Ajudar | Instituto João de Barros</title>
-        <meta name="description" content="Formas de colaborar com o Instituto: doações de materiais, apoio financeiro e voluntariado." />
       </Helmet>
-      <main style={{ padding: 20 }}>
-      <h1 style={{ color: theme.colors.primary }}>Como Ajudar</h1>
-      <p style={{ color: theme.colors.text, maxWidth: 780 }}>
-        Esta é a página de conversão central — tornando fácil doar ou registrar-se como
-        voluntário. A prioridade aqui é clareza, contraste e poucas etapas para conversão.
-      </p>
+      <main style={{ padding: '40px 20px', maxWidth: 900, margin: '0 auto', minHeight: '80vh' }}>
+        
+        <section style={{ textAlign: 'center', marginBottom: 40 }}>
+          <h1 style={{ color: theme.colors.primary, fontSize: '2.5rem', marginBottom: 16 }}>Faça parte desta construção</h1>
+          <p style={{ maxWidth: 600, margin: '0 auto', color: theme.colors.text, fontSize: '1.1rem' }}>
+            Escolha como prefere contribuir. Cada tijolo, cada real e cada hora de trabalho contam.
+          </p>
+        </section>
 
-<section style={{ marginTop: 28 }}>
-        <h2 style={{ color: theme.colors.primary }}>Formas de Colaboração</h2>
-        <p style={{ color: theme.colors.text }}>Você pode contribuir de várias formas. Abaixo estão as principais maneiras de colaborar — listamos o mais comum e o que normalmente precisamos:</p>
-        <p style={{ color: theme.colors.text, fontWeight: 600, marginTop: 8 }}>Nossas reformas e melhorias visam garantir moradia digna para famílias em situação de vulnerabilidade.</p>
-        <ul style={{ color: theme.colors.text, maxWidth: 720 }}>
-          <li><strong>Doação de materiais:</strong> cimento, revestimentos, portas, janelas, ferragens e afins.</li>
-          <li><strong>Voluntariado:</strong> mão de obra e profissionais (pedreiros, eletricistas, pintores, ajudantes, arquitetos e engenheiros).</li>
-          <li><strong>Apoio financeiro:</strong> contribuições para compra de materiais e despesas da obra.</li>
-          <li><strong>Parcerias:</strong> empresas e comércios podem doar materiais, oferecer descontos ou ceder serviços.</li>
-        </ul>
-
-        <div style={{ marginTop: 28 }}>
-          <div style={{ background: '#fff', padding: 16, borderRadius: theme.radii.soft, maxWidth: 720 }}>
-            <h4 style={{ margin: 0, color: theme.colors.primary }}>Contato rápido</h4>
-            <p style={{ marginTop: 8, color: theme.colors.text, marginBottom: 0 }}><strong>Telefone:</strong> 📞 (16) 99181-1811</p>
-            <p style={{ color: theme.colors.text, marginBottom: 0 }}><strong>Email:</strong> <a href="mailto:ijbfranca@gmail.com">ijbfranca@gmail.com</a></p>
-            <p style={{ color: theme.colors.text, marginTop: 8, marginBottom: 0 }}><strong>Doar materiais:</strong> entregue no Instituto — ver horários ao ligar.</p>
+        {/* CARTÕES DE SELEÇÃO */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 20 }}>
+          
+          {/* 1. Financeiro */}
+          <div 
+            onClick={() => setActiveSection(activeSection === 'financeiro' ? null : 'financeiro')}
+            className="hover-card"
+            style={{ 
+              background: activeSection === 'financeiro' ? '#FFF9C4' : '#fff', 
+              border: `2px solid ${activeSection === 'financeiro' ? theme.colors.highlight : 'transparent'}`,
+              padding: 24, borderRadius: 16, cursor: 'pointer', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
+            }}
+          >
+            <FaHandHoldingUsd size={32} color={theme.colors.highlight} style={{ marginBottom: 12 }} />
+            <h3 style={{ margin: 0, color: theme.colors.primary }}>Doar Dinheiro</h3>
+            <p style={{ fontSize: 14, color: theme.colors.text }}>Via Pix ou Transferência</p>
           </div>
 
-          <div style={{ marginTop: 12, maxWidth: 720 }}>
-            <div style={{ background: '#fff', padding: 12, borderRadius: theme.radii.soft, textAlign: 'center' }}>
-              <p style={{ margin: 0, color: theme.colors.text }}><strong>Instagram</strong></p>
-              <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer" style={{ color: theme.colors.primary }}>@instituto_joaodebarro_franca</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section style={{ marginTop: 28 }}>
-        <h2 style={{ color: theme.colors.primary }}>Como Ajudar — Ação Imediata</h2>
-        <p style={{ color: theme.colors.text }}>Clique numa das três opções para expandir mais informações ou preencher o formulário ali mesmo.</p>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginTop: 20 }}>
-          {/* Card: Apoio Financeiro */}
-          <div onClick={() => toggleSection('financeiro')} className="hover-card" style={{ cursor: 'pointer', padding: 20, borderRadius: theme.radii.soft, background: activeSection === 'financeiro' ? '#FFFDE7' : '#fff', border: activeSection === 'financeiro' ? `2px solid ${theme.colors.highlight}` : '1px solid rgba(0,0,0,0.04)', textAlign: 'center' }}>
-            <FaHandHoldingUsd size={40} color={theme.colors.highlight} style={{ marginBottom: 12 }} />
-            <h3 style={{ margin: 0, color: theme.colors.primary }}>Apoio Financeiro</h3>
-            <p style={{ color: theme.colors.text, fontSize: 14 }}>Contribua com qualquer valor via Pix ou transferência.</p>
-            <div style={{ marginTop: 12 }}>
-              <button style={{ padding: '8px 14px', borderRadius: 8, background: activeSection === 'financeiro' ? theme.colors.highlight : 'transparent', border: activeSection === 'financeiro' ? 'none' : `1px solid ${theme.colors.highlight}`, color: activeSection === 'financeiro' ? '#000' : theme.colors.highlight, fontWeight: 700 }}>{activeSection === 'financeiro' ? 'Fechar' : 'Doar Agora'}</button>
-            </div>
-          </div>
-
-          {/* Card: Doar Materiais */}
-          <div onClick={() => toggleSection('material')} className="hover-card" style={{ cursor: 'pointer', padding: 20, borderRadius: theme.radii.soft, background: activeSection === 'material' ? '#FFF3E0' : '#fff', border: activeSection === 'material' ? `2px solid ${theme.colors.orangeStrong}` : '1px solid rgba(0,0,0,0.04)', textAlign: 'center' }}>
-            <FaTools size={40} color={theme.colors.orangeStrong} style={{ marginBottom: 12 }} />
+          {/* 2. Material */}
+          <div 
+            onClick={() => setActiveSection(activeSection === 'material' ? null : 'material')}
+            className="hover-card"
+            style={{ 
+              background: activeSection === 'material' ? '#FFE0B2' : '#fff', 
+              border: `2px solid ${activeSection === 'material' ? theme.colors.orangeStrong : 'transparent'}`,
+              padding: 24, borderRadius: 16, cursor: 'pointer', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
+            }}
+          >
+            <FaTools size={32} color={theme.colors.orangeStrong} style={{ marginBottom: 12 }} />
             <h3 style={{ margin: 0, color: theme.colors.primary }}>Doar Materiais</h3>
-            <p style={{ color: theme.colors.text, fontSize: 14 }}>Cimento, pisos, portas e restos de obra aproveitáveis.</p>
-            <div style={{ marginTop: 12 }}>
-              <button style={{ padding: '8px 14px', borderRadius: 8, background: activeSection === 'material' ? theme.colors.orangeStrong : 'transparent', border: activeSection === 'material' ? 'none' : `1px solid ${theme.colors.orangeStrong}`, color: activeSection === 'material' ? '#fff' : theme.colors.orangeStrong, fontWeight: 700 }}>{activeSection === 'material' ? 'Fechar' : 'Tenho Materiais'}</button>
-            </div>
+            <p style={{ fontSize: 14, color: theme.colors.text }}>Cimento, pisos e itens de obra</p>
           </div>
 
-          {/* Card: Ser Voluntário */}
-          <div onClick={() => toggleSection('voluntario')} className="hover-card" style={{ cursor: 'pointer', padding: 20, borderRadius: theme.radii.soft, background: activeSection === 'voluntario' ? '#E8F5E9' : '#fff', border: activeSection === 'voluntario' ? `2px solid ${theme.colors.secondary}` : '1px solid rgba(0,0,0,0.04)', textAlign: 'center' }}>
-            <FaHandsHelping size={40} color={theme.colors.secondary} style={{ marginBottom: 12 }} />
+          {/* 3. Voluntário */}
+          <div 
+            onClick={() => setActiveSection(activeSection === 'voluntario' ? null : 'voluntario')}
+            className="hover-card"
+            style={{ 
+              background: activeSection === 'voluntario' ? '#C8E6C9' : '#fff', 
+              border: `2px solid ${activeSection === 'voluntario' ? theme.colors.secondary : 'transparent'}`,
+              padding: 24, borderRadius: 16, cursor: 'pointer', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
+            }}
+          >
+            <FaHandsHelping size={32} color={theme.colors.secondary} style={{ marginBottom: 12 }} />
             <h3 style={{ margin: 0, color: theme.colors.primary }}>Ser Voluntário</h3>
-            <p style={{ color: theme.colors.text, fontSize: 14 }}>Engenheiros, pedreiros ou ajudantes gerais.</p>
-            <div style={{ marginTop: 12 }}>
-              <button style={{ padding: '8px 14px', borderRadius: 8, background: activeSection === 'voluntario' ? theme.colors.secondary : 'transparent', border: activeSection === 'voluntario' ? 'none' : `1px solid ${theme.colors.secondary}`, color: activeSection === 'voluntario' ? '#fff' : theme.colors.secondary, fontWeight: 700 }}>{activeSection === 'voluntario' ? 'Fechar' : 'Quero Ajudar'}</button>
-            </div>
+            <p style={{ fontSize: 14, color: theme.colors.text }}>Doe o seu tempo e talento</p>
           </div>
         </div>
 
-        {/* Expanded area */}
-        <div style={{ marginTop: 24 }}>
+        {/* ÁREA DE CONTEÚDO EXPANDIDO */}
+        <div ref={contentRef} style={{ marginTop: 40 }}>
+          
           {activeSection === 'financeiro' && (
-            <div ref={financialRef} style={{ background: '#fff', padding: 24, borderRadius: theme.radii.soft, boxShadow: '0 10px 40px rgba(0,0,0,0.06)' }}>
-              <h3 style={{ color: theme.colors.primary, marginTop: 0, textAlign: 'center' }}>Dados Bancários — Transferência</h3>
-              <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center', marginTop: 18 }}>
-                <div style={{ flex: '1 1 320px', minWidth: 280, textAlign: 'left', background: '#FAFAFA', padding: 18, borderRadius: 12, border: '1px dashed #ddd' }}>
-                  <div style={{ fontWeight: 800, marginBottom: 8 }}>Dados para Transferência</div>
-                  <div style={{ marginBottom: 8 }}><strong>Banco:</strong> Sicoob (756) <button onClick={() => { navigator.clipboard.writeText('Sicoob (756)'); alert('Banco copiado: Sicoob (756)') }} style={{ marginLeft: 8, padding: '4px 8px', borderRadius: 6, border: 'none', background: '#eee', cursor: 'pointer' }}>Copiar</button></div>
-                  <div style={{ marginBottom: 8 }}><strong>Agência:</strong> 4321 <button onClick={() => { navigator.clipboard.writeText('4321'); alert('Agência copiada: 4321') }} style={{ marginLeft: 8, padding: '4px 8px', borderRadius: 6, border: 'none', background: '#eee', cursor: 'pointer' }}>Copiar</button></div>
-                  <div style={{ marginBottom: 8 }}><strong>Conta:</strong> 2005247-2 <button onClick={() => { navigator.clipboard.writeText('2005247-2'); alert('Conta copiada: 2005247-2') }} style={{ marginLeft: 8, padding: '4px 8px', borderRadius: 6, border: 'none', background: '#eee', cursor: 'pointer' }}>Copiar</button></div>
-                  <div style={{ marginBottom: 8 }}><strong>Favorecido:</strong> Instituto João de Barros <button onClick={() => { navigator.clipboard.writeText('Instituto João de Barros'); alert('Favorecido copiado') }} style={{ marginLeft: 8, padding: '4px 8px', borderRadius: 6, border: 'none', background: '#eee', cursor: 'pointer' }}>Copiar</button></div>
-                  <div style={{ marginTop: 12, fontSize: 14, color: theme.colors.muted }}><strong>Instrução:</strong> Ao realizar a transferência, informe no comprovante: "Doação — [Obra/Referência]" para facilitar a conciliação.</div>
+            <div style={{ background: '#fff', padding: 32, borderRadius: 16, boxShadow: '0 10px 40px rgba(0,0,0,0.08)', animation: 'fadeIn 0.4s' }}>
+              <h2 style={{ textAlign: 'center', color: theme.colors.primary, marginTop: 0 }}>Dados para Doação</h2>
+              <p style={{ textAlign: 'center', marginBottom: 30, color: theme.colors.muted }}>Use a chave Pix (CNPJ) ou os dados da conta bancária.</p>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 30 }}>
+                
+                {/* Opção PIX */}
+                <div style={{ background: '#FAFAFA', padding: 20, borderRadius: 12, border: `1px solid ${theme.colors.highlight}` }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                    <FaCopy size={24} color={theme.colors.highlight} />
+                    <h3 style={{ margin: 0, color: theme.colors.primary }}>Chave Pix (CNPJ)</h3>
+                  </div>
+                  
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#fff', padding: '12px', borderRadius: 8, border: '1px solid #eee' }}>
+                    <code style={{ flex: 1, fontSize: 18, fontWeight: 700, color: theme.colors.text }}>{pixKey}</code>
+                    <CopyButton textToCopy={pixKey} label="Copiar" />
+                  </div>
+                  <p style={{ fontSize: 14, color: theme.colors.muted, marginTop: 12 }}>Titular: Instituto João de Barros</p>
                 </div>
 
-                {/* Resumo removido conforme solicitado */}
+                {/* Opção Transferência */}
+                <div style={{ background: '#FAFAFA', padding: 20, borderRadius: 12, border: '1px solid #ddd' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                    <FaUniversity size={24} color={theme.colors.primary} />
+                    <h3 style={{ margin: 0, color: theme.colors.primary }}>Transferência (TED/DOC)</h3>
+                  </div>
+                  
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee', paddingBottom: 8 }}>
+                      <span>Banco Sicoob (756)</span>
+                      <CopyButton textToCopy={'756'} label="Copiar" />
+                    </li>
+                    <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee', paddingBottom: 8 }}>
+                      <span>Agência: <strong>4321</strong></span>
+                      <CopyButton textToCopy={'4321'} label="Copiar" />
+                    </li>
+                    <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee', paddingBottom: 8 }}>
+                      <span>Conta: <strong>2005247-2</strong></span>
+                      <CopyButton textToCopy={'2005247-2'} label="Copiar" />
+                    </li>
+                  </ul>
+                </div>
+
               </div>
             </div>
           )}
 
           {activeSection === 'material' && (
-            <div ref={materialRef} style={{ marginTop: 8 }}>
-              <MaterialInfo />
-              <div style={{ marginTop: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h4 style={{ margin: 0, color: theme.colors.primary }}>Ficha de Doação</h4>
-                <button onClick={() => setActiveSection(null)} style={{ background: 'transparent', border: 'none', color: theme.colors.primary, cursor: 'pointer' }}>Fechar</button>
-              </div>
+            <div style={{ background: '#fff', padding: 32, borderRadius: 16, borderTop: `6px solid ${theme.colors.orangeStrong}`, boxShadow: '0 10px 40px rgba(0,0,0,0.08)', animation: 'fadeIn 0.4s' }}>
+              <h2 style={{ color: theme.colors.orangeStrong, marginTop: 0 }}>O que precisamos?</h2>
+              <p style={{ marginBottom: 24 }}>No momento, nossas maiores necessidades são <strong>cimento, areia e revestimentos</strong>. Se tiver sobras de obra em bom estado, também aceitamos!</p>
               <MaterialForm onClose={() => setActiveSection(null)} />
             </div>
           )}
 
           {activeSection === 'voluntario' && (
-            <div ref={volunteerRef} style={{ marginTop: 8 }}>
-              <div style={{ background: '#fff', padding: 18, borderRadius: theme.radii.soft }}>
-                <h3 style={{ color: theme.colors.secondary, marginTop: 0 }}>Junte-se à Equipe</h3>
-                <VoluntarioForm onClose={() => setActiveSection(null)} />
-              </div>
+            <div style={{ background: '#fff', padding: 32, borderRadius: 16, borderTop: `6px solid ${theme.colors.secondary}`, boxShadow: '0 10px 40px rgba(0,0,0,0.08)', animation: 'fadeIn 0.4s' }}>
+              <h2 style={{ color: theme.colors.secondary, marginTop: 0 }}>Cadastro de Voluntário</h2>
+              <p style={{ marginBottom: 24 }}>Precisamos de todo o tipo de ajuda: desde mão de obra especializada (engenharia, pedreiro) até apoio em eventos e transporte.</p>
+              <VoluntarioForm onClose={() => setActiveSection(null)} />
             </div>
           )}
+
         </div>
-      </section>
+
+        {/* Contato Extra */}
+        <div style={{ marginTop: 60, textAlign: 'center', borderTop: '1px solid #eee', paddingTop: 40 }}>
+          <p style={{ marginBottom: 16 }}>Dúvidas? Fale conosco diretamente.</p>
+          <a href="https://wa.me/5516991811811" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+            <button style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 30, background: '#25D366', color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer' }}>
+              <FaWhatsapp size={18} /> WhatsApp Oficial
+            </button>
+          </a>
+        </div>
+
       </main>
     </>
   )

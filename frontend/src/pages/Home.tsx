@@ -88,7 +88,7 @@ const Home: React.FC = () => {
           {[
             { number: '05', label: 'obras entregues', desc: 'Reformas concluídas para famílias.' },
             { number: '+20', label: 'voluntários', desc: 'Profissionais mobilizados em ações.' },
-            { number: '02', label: 'projetos ativos', desc: 'Em fase de aprovação ou execução.' },
+            { number: '02', label: 'projetos ativos', desc: 'Projetos em andamento.' },
             { number: '+300', label: 'pessoas', desc: 'Impactadas diretamente pelas ações.' },
           ].map((item, idx) => (
             <div
