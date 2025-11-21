@@ -7,7 +7,9 @@ import DonationModal from './ui/DonationModal'
 const navStyle: React.CSSProperties = {
   display: 'flex',
   gap: 16,
-  alignItems: 'center'
+  alignItems: 'center',
+  flexWrap: 'wrap',
+  justifyContent: 'center'
 }
 
 const headerStyle: React.CSSProperties = {
@@ -28,7 +30,7 @@ export const Header: React.FC = () => {
   return (
     <div>
       <header style={headerStyle}>
-        <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ width: 44, height: 44, borderRadius: 8, background: theme.colors.primary, display: 'flex', alignItems: 'center', justifyContent: 'center' }} aria-hidden="true">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ícone de passarinho">

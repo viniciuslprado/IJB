@@ -1,51 +1,90 @@
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import { theme } from '../styles/theme'
+import { FaInstagram, FaHammer, FaHandHoldingHeart, FaUsers } from 'react-icons/fa'
 
 const QuemSomos: React.FC = () => {
   return (
-    <main style={{ padding: 20 }}>
-      <h1 style={{ color: theme.colors.primary }}>Sobre o Instituto João de Barros</h1>
-      <p style={{ maxWidth: 720, color: theme.colors.text }}>
-        O Instituto João de Barros, de Franca-SP, atua na construção de oportunidades para
-        famílias e crianças. Inspirados pelo comportamento do joão-de-barro, buscamos oferecer
-        um ninho seguro: reformamos e construímos moradias, apoiamos com capacitação profissional
-        e oferecemos acompanhamento social às famílias atendidas.
-      </p>
+    <>
+      <Helmet>
+        <title>Quem Somos | Instituto João de Barros</title>
+        <meta name="description" content="Conheça a missão e as ações do Instituto João de Barros em Franca-SP." />
+      </Helmet>
+      <main style={{ padding: '40px 20px', maxWidth: 1000, margin: '0 auto' }}>
+        <section style={{ textAlign: 'center', marginBottom: 50 }}>
+          <h1 style={{ color: theme.colors.primary, fontSize: '3rem', marginBottom: 16 }}>Quem Somos</h1>
+          <p style={{ maxWidth: 720, margin: '0 auto', fontSize: '1.1rem', lineHeight: 1.6, color: theme.colors.text }}>
+            O Instituto João de Barros, de Franca-SP, atua na construção de oportunidades para
+            famílias e crianças. Inspirados pelo comportamento do joão-de-barro, buscamos oferecer
+            um ninho seguro.
+          </p>
+        </section>
 
-      <section style={{ marginTop: 20, maxWidth: 800 }}>
-        <h2 style={{ color: theme.colors.primary }}>O que fazemos</h2>
-        <p style={{ color: theme.colors.text }}>
-          Somos uma associação de voluntários que organiza reformas e construções para
-          famílias em situação de vulnerabilidade. Trabalhamos com doações de materiais,
-          apoio financeiro e esforço voluntário — incluindo arquitetos e engenheiros que
-          colaboram com projetos técnicos e acompanhamento das obras. Também promovemos
-          ações de capacitação e apoio social para fortalecer a autonomia das famílias.
-        </p>
-        <div style={{ marginTop: 12 }}>
-          <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer">
-            <button style={{ padding: '8px 12px', borderRadius: 8, background: theme.colors.primary, color: '#fff', border: 'none', fontWeight: 700 }}>Instagram</button>
-          </a>
-        </div>
-      </section>
-      <section style={{ marginTop: 20, maxWidth: 800 }}>
-        <h2 style={{ color: theme.colors.primary }}>Nossa missão</h2>
-        <p style={{ color: theme.colors.text }}>Promover dignidade por meio de educação, acolhimento, capacitação e moradia digna.</p>
-        <div style={{ marginTop: 12 }}>
-          <p style={{ color: theme.colors.text, margin: 0 }}><strong>Movimento criado por voluntários da cidade de Franca.</strong></p>
-          <p style={{ color: theme.colors.text, marginTop: 6 }}><strong>Nossa missão é transformar vidas por meio de moradia digna.</strong></p>
-          <p style={{ color: theme.colors.text, marginTop: 6 }}><strong>Acreditamos no poder da comunidade.</strong></p>
-        </div>
-      </section>
-      <section style={{ marginTop: 20, maxWidth: 800 }}>
-        <h2 style={{ color: theme.colors.primary }}>Participação e eventos</h2>
-        <p style={{ color: theme.colors.text }}>
-          O Instituto organiza e participa de eventos beneficentes que são fundamentais para angariar recursos e aproximar a comunidade: entre eles o evento de Hipismo, ações promovidas pela Loja Maçônica Pedra da Luz, e diversas parcerias e campanhas de arrecadação.
-        </p>
-        <p style={{ color: theme.colors.text }}>
-          Muitas ações dependem do apoio de voluntários e da participação ativa da comunidade de Franca. Publicações e postagens antigas do Instituto agradecem regularmente colaboradores e voluntários que tornam os projetos possíveis.
-        </p>
-      </section>
-    </main>
+        <section style={{ marginBottom: 60 }}>
+          <h2 style={{ textAlign: 'center', color: theme.colors.primary, marginBottom: 30 }}>Nossa Missão</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
+            <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: 12, textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+              <div style={{ background: '#EFEBE9', width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <FaHammer size={24} color={theme.colors.brownWarm} />
+              </div>
+              <h3 style={{ color: theme.colors.primary, margin: '0 0 8px 0' }}>Moradia Digna</h3>
+              <p style={{ fontSize: 14, color: theme.colors.text }}>Reformamos e construímos lares para garantir segurança física e emocional.</p>
+            </div>
+
+            <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: 12, textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+              <div style={{ background: '#E8F5E9', width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <FaHandHoldingHeart size={24} color={theme.colors.secondary} />
+              </div>
+              <h3 style={{ color: theme.colors.primary, margin: '0 0 8px 0' }}>Acolhimento</h3>
+              <p style={{ fontSize: 14, color: theme.colors.text }}>Oferecemos acompanhamento social e capacitação profissional às famílias.</p>
+            </div>
+
+            <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: 12, textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+              <div style={{ background: '#FFF8E1', width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <FaUsers size={24} color={theme.colors.highlight} />
+              </div>
+              <h3 style={{ color: theme.colors.primary, margin: '0 0 8px 0' }}>Comunidade</h3>
+              <p style={{ fontSize: 14, color: theme.colors.text }}>Acreditamos no poder da mobilização voluntária e da solidariedade.</p>
+            </div>
+          </div>
+        </section>
+
+        <section style={{ background: '#fff', padding: 40, borderRadius: theme.radii.soft, boxShadow: '0 4px 20px rgba(0,0,0,0.03)', marginBottom: 40 }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <h2 style={{ color: theme.colors.primary, marginTop: 0 }}>O que fazemos</h2>
+            <p style={{ lineHeight: 1.6, color: theme.colors.text }}>
+              Somos uma associação de voluntários que organiza reformas e construções para
+              famílias em situação de vulnerabilidade. Trabalhamos com doações de materiais,
+              apoio financeiro e esforço voluntário — incluindo arquitetos e engenheiros que
+              colaboram com projetos técnicos.
+            </p>
+
+            <div style={{ marginTop: 24 }}>
+              <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+                <button style={{ padding: '10px 20px', borderRadius: 8, background: 'transparent', border: `2px solid #C13584`, color: '#C13584', fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, transition: 'all 0.2s' }}>
+                  <FaInstagram size={20} />
+                  Siga-nos no Instagram
+                </button>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <h2 style={{ color: theme.colors.primary }}>Participação e Eventos</h2>
+          <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', marginTop: 12, flexWrap: 'wrap' }}>
+            <div style={{ flex: '1 1 360px' }}>
+              <p style={{ lineHeight: 1.6, color: theme.colors.text }}>
+                O Instituto organiza e participa de eventos beneficentes fundamentais para angariar recursos, como o evento de Hipismo e ações da Loja Maçônica Pedra da Luz.
+              </p>
+              <p style={{ lineHeight: 1.6, color: theme.colors.text }}>
+                Muitas ações dependem do apoio de voluntários e da participação ativa da comunidade de Franca. O nosso movimento é criado por voluntários e para a comunidade.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   )
 }
 

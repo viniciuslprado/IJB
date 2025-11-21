@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { theme } from '../../styles/theme'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import CarouselNavButton from './CarouselNavButton'
 
 type CarouselProps = {
   images: string[]
@@ -7,11 +9,14 @@ type CarouselProps = {
   autoPlayMs?: number // 0 means no autoplay
 }
 
+// NavButton extracted to `CarouselNavButton.tsx`
+
 const Carousel: React.FC<CarouselProps> = ({ images, height = 220, autoPlayMs = 0 }) => {
   const [index, setIndex] = useState(0)
   const total = images.length
   const timerRef = useRef<number | null>(null)
   const hoverRef = useRef(false)
+  const [isMobile, setIsMobile] = useState<boolean>(() => (typeof window !== 'undefined' ? window.innerWidth <= 600 : false))
 
   const next = () => setIndex((i) => (i + 1) % total)
   const prev = () => setIndex((i) => (i - 1 + total) % total)
@@ -25,6 +30,13 @@ const Carousel: React.FC<CarouselProps> = ({ images, height = 220, autoPlayMs = 
       if (timerRef.current) window.clearInterval(timerRef.current)
     }
   }, [autoPlayMs, total])
+
+  // responsive detection: update isMobile on resize
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 600)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   if (total === 0) return null
 
@@ -61,43 +73,13 @@ const Carousel: React.FC<CarouselProps> = ({ images, height = 220, autoPlayMs = 
 
       {total > 1 && (
         <>
-          <button
-            aria-label="previous"
-            onClick={prev}
-            style={{
-              position: 'absolute',
-              left: 8,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'rgba(0,0,0,0.4)',
-              color: '#fff',
-              border: 'none',
-              padding: '6px 8px',
-              borderRadius: 6,
-              cursor: 'pointer'
-            }}
-          >
-            ‹
-          </button>
+          <CarouselNavButton ariaLabel="anterior" onClick={prev} side="left" isMobile={isMobile}>
+            <FaChevronLeft size={isMobile ? 18 : 20} />
+          </CarouselNavButton>
 
-          <button
-            aria-label="next"
-            onClick={next}
-            style={{
-              position: 'absolute',
-              right: 8,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'rgba(0,0,0,0.4)',
-              color: '#fff',
-              border: 'none',
-              padding: '6px 8px',
-              borderRadius: 6,
-              cursor: 'pointer'
-            }}
-          >
-            ›
-          </button>
+          <CarouselNavButton ariaLabel="próximo" onClick={next} side="right" isMobile={isMobile}>
+            <FaChevronRight size={isMobile ? 18 : 20} />
+          </CarouselNavButton>
 
           <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: 8, display: 'flex', gap: 6 }}>
             {images.map((_, i) => (

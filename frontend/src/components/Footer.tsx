@@ -3,10 +3,10 @@ import { theme } from '../styles/theme'
 import { Link } from 'react-router-dom'
 
 const footerStyle: React.CSSProperties = {
-  background: '#fff',
-  borderTop: `1px solid rgba(0,0,0,0.06)`,
-  padding: '28px 20px',
-  marginTop: 40
+  background: theme.colors.primaryDark || theme.colors.primary,
+  color: '#fff',
+  padding: '40px 20px',
+  marginTop: 60
 }
 
 const colStyle: React.CSSProperties = {
@@ -20,30 +20,30 @@ const Footer: React.FC = () => {
     <footer style={footerStyle}>
       <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20, alignItems: 'start' }}>
         <div style={colStyle}>
-          <div style={{ fontWeight: 800, color: theme.colors.primary }}>Instituto João de Barros</div>
-          <div style={{ color: theme.colors.text, fontSize: 14 }}>Franca — SP</div>
+          <div style={{ fontWeight: 800, color: '#fff' }}>Instituto João de Barros</div>
+          <div style={{ color: '#fff', fontSize: 14 }}>Franca — SP</div>
         </div>
 
         <div style={colStyle}>
-          <div style={{ fontWeight: 700, color: theme.colors.primary }}>Institucional</div>
-          <Link to="/" style={{ color: theme.colors.text, textDecoration: 'none' }}>Home</Link>
-          <Link to="/sobre" style={{ color: theme.colors.text, textDecoration: 'none' }}>Quem Somos</Link>
-          <Link to="/projetos" style={{ color: theme.colors.text, textDecoration: 'none' }}>Projetos</Link>
+          <div style={{ fontWeight: 700, color: '#fff' }}>Institucional</div>
+          <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>Home</Link>
+          <Link to="/sobre" style={{ color: '#fff', textDecoration: 'none' }}>Quem Somos</Link>
+          <Link to="/projetos" style={{ color: '#fff', textDecoration: 'none' }}>Projetos</Link>
         </div>
 
         <div style={colStyle}>
-          <div style={{ fontWeight: 700, color: theme.colors.primary }}>Apoie</div>
-          <Link to="/ajudar" style={{ color: theme.colors.text, textDecoration: 'none' }}>Como Ajudar</Link>
-          <Link to="/ajudar?type=dinheiro#doacoes" style={{ color: theme.colors.text, textDecoration: 'none' }}>Doe Agora</Link>
-          <Link to="/ajudar?type=voluntario#doacoes" style={{ color: theme.colors.text, textDecoration: 'none' }}>Seja Voluntário</Link>
+          <div style={{ fontWeight: 700, color: '#fff' }}>Apoie</div>
+          <Link to="/ajudar" style={{ color: '#fff', textDecoration: 'none' }}>Como Ajudar</Link>
+          <Link to="/ajudar?type=dinheiro#doacoes" style={{ color: '#fff', textDecoration: 'none' }}>Doe Agora</Link>
+          <Link to="/ajudar?type=voluntario#doacoes" style={{ color: '#fff', textDecoration: 'none' }}>Seja Voluntário</Link>
         </div>
 
         <div style={colStyle}>
-          <div style={{ fontWeight: 700, color: theme.colors.primary }}>Contato</div>
-          <div style={{ color: theme.colors.text }}>Telefone: (16) 99181-1811</div>
-          <div style={{ color: theme.colors.text }}>Email: <a href="mailto:ijbfranca@gmail.com" style={{ color: theme.colors.primary, textDecoration: 'none' }}>ijbfranca@gmail.com</a></div>
+          <div style={{ fontWeight: 700, color: '#fff' }}>Contato</div>
+          <div style={{ color: '#fff' }}>Telefone: (16) 99181-1811</div>
+          <div style={{ color: '#fff' }}>Email: <a href="mailto:ijbfranca@gmail.com" style={{ color: '#fff', textDecoration: 'none' }}>ijbfranca@gmail.com</a></div>
           <div style={{ marginTop: 6 }}>
-            <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer" style={{ color: theme.colors.primary, textDecoration: 'none' }}>Instagram: @instituto_joaodebarro_franca</a>
+            <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>Instagram: @instituto_joaodebarro_franca</a>
           </div>
         </div>
       </div>

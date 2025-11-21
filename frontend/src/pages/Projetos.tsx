@@ -1,123 +1,124 @@
 import React from 'react'
 import { theme } from '../styles/theme'
 import Carousel from '../components/ui/Carousel'
+import { FaWhatsapp, FaEnvelope } from 'react-icons/fa'
+
+// Helper row component (Zig-Zag layout)
+const ProjectRow: React.FC<{
+  title: string
+  subtitle?: string
+  description: React.ReactNode
+  images: string[]
+  isReversed?: boolean
+}> = ({ title, subtitle, description, images, isReversed }) => (
+  <article style={{
+    display: 'flex',
+    flexDirection: isReversed ? 'row-reverse' as const : 'row' as const,
+    flexWrap: 'wrap',
+    gap: 40,
+    alignItems: 'center',
+    marginBottom: 80
+  }}>
+    <div style={{ flex: '1 1 400px', minWidth: 300 }}>
+      <h3 style={{ color: theme.colors.primary, marginBottom: 4, fontSize: '1.8rem' }}>{title}</h3>
+      {subtitle && (
+        <span style={{ display: 'inline-block', background: '#F7F7F7', color: theme.colors.text, fontSize: 14, fontWeight: 600, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{subtitle}</span>
+      )}
+      <div style={{ lineHeight: 1.6, color: theme.colors.text }}>{description}</div>
+    </div>
+
+    <div style={{ flex: '1 1 400px', minWidth: 300 }}>
+      <div style={{ boxShadow: '0 10px 30px rgba(0,0,0,0.1)', borderRadius: theme.radii.soft, overflow: 'hidden' }}>
+        <Carousel images={images} height={320} autoPlayMs={0} />
+      </div>
+    </div>
+  </article>
+)
 
 const Projetos: React.FC = () => {
-
   return (
-    <main style={{ padding: 20 }}>
-      <h1 style={{ color: theme.colors.primary }}>Projetos</h1>
-
-      <section style={{ marginTop: 28, maxWidth: 900 }}>
-        <h2 id="obras" style={{ color: theme.colors.primary }}>Obras Realizadas</h2>
-
-        <p style={{ color: theme.colors.text }}>
-          O Instituto João de Barros realiza reformas e construções para famílias em situação de vulnerabilidade social.
-          Selecionamos beneficiários por processo de triagem e atuamos por meio de doações de materiais, trabalho voluntário e
-          acompanhamento técnico de arquitetos e engenheiros.
+    <main style={{ padding: '40px 20px', maxWidth: 1100, margin: '0 auto' }}>
+      <section style={{ textAlign: 'center', marginBottom: 60 }}>
+        <h1 style={{ color: theme.colors.primary, fontSize: '3rem' }}>Nossos Projetos</h1>
+        <p style={{ maxWidth: 700, margin: '0 auto', color: theme.colors.text, fontSize: '1.1rem' }}>
+          Transformamos vidas tijolo a tijolo. Conheça algumas das histórias que ajudámos a construir.
         </p>
+      </section>
 
-        <p style={{ color: theme.colors.text }}>
-          Abaixo apresentamos algumas obras e ações recentes.
-        </p>
+      <ProjectRow
+        title="Reforma Jardim Aeroporto IV"
+        subtitle="Obra 1"
+        description={
+          <p>Reforma de residência incluindo colocação de piso cerâmico, instalação de esquadrias e pintura. A iniciativa partiu de voluntárias locais; o IJB coordenou e concluiu as melhorias.</p>
+        }
+        images={['/fotos/primeira1.jpg', '/fotos/primeira2.jpg', '/fotos/primeira3.jpg', '/fotos/primeira4.jpg', '/fotos/primeira5.jpg', '/fotos/primeira6.jpg']}
+      />
 
-        <h3 style={{ color: theme.colors.primary, marginTop: 18 }}>Obra 1</h3>
-        <p style={{ color: theme.colors.text }}>
-          Reforma de residência no Jardim Aeroporto IV, incluindo colocação de piso cerâmico, instalação de esquadrias e pintura.
-          A iniciativa partiu de voluntárias locais; o IJB coordenou e concluiu as melhorias. Agradecemos a todos os envolvidos.
+      <ProjectRow
+        isReversed
+        title="Casa da Sra. Raimunda"
+        subtitle="Obra 2 • 2018"
+        description={
+          <>
+            <p>Entregue em 23 de junho de 2018 para a Sra. Raimunda e seus sete filhos. O projeto incluiu adaptações de acessibilidade completas.</p>
+            <p>Recebemos doações de revestimentos, granito e aquecedor solar. Agradecimento especial ao casal Teixeira e Martha pela doação do terreno.</p>
+          </>
+        }
+        images={['/fotos/segunda1.jpg', '/fotos/segunda2.jpg', '/fotos/segunda3.jpg', '/fotos/segunda4.jpg', '/fotos/segunda5.jpg', '/fotos/segunda6.jpg']}
+      />
+
+      <ProjectRow
+        title="Reconstrução Solidária"
+        subtitle="Obra 3 • 2020"
+        description={<p>Obra iniciada após mobilização da comunidade para atender uma família que vivia em barraco de lona. O IJB coordenou a captação de materiais e mão de obra. Entrega simbólica em 15/08/2020.</p>}
+        images={['/fotos/terceira.jpg', '/fotos/terceira2.jpg', '/fotos/terceira3.jpg', '/fotos/terceira4.jpg', '/fotos/terceira5.jpg']}
+      />
+
+      <ProjectRow
+        isReversed
+        title="Casa da Sra. Raquel"
+        subtitle="Obra 4 • Dez 2024"
+        description={
+          <>
+            <p>Projeto focado em iluminação, ventilação e acessibilidade. Com apoio de parceiros em pisos e esquadrias, a obra foi entregue antes do Natal.</p>
+            <p>Uma ampla varanda foi criada para convívio da família.</p>
+          </>
+        }
+        images={['/fotos/quarta5.png', '/fotos/quarta2.png', '/fotos/quarta3.png', '/fotos/quarta4.png', '/fotos/quarta1.png']}
+      />
+
+      <ProjectRow
+        title="Casa da Família Caroline"
+        subtitle="Obra 5 • Dez 2023"
+        description={
+          <>
+            <p>Iniciativa liderada pelo Grupo "Jantar por uma Boa Causa". Terreno doado pelos irmãos Pedrosa (Drogafarma).</p>
+            <p>Casa ampla e ventilada, com espaços de estudo para as 3 crianças. Entregue antes do Natal graças à mobilização de voluntários.</p>
+          </>
+        }
+        images={['/fotos/quinta4.png', '/fotos/quinta1.png', '/fotos/quinta2.png', '/fotos/quinta3.png', '/fotos/quinta5.png']}
+      />
+
+      <section style={{
+        background: '#FFF8E1',
+        border: `1px solid ${theme.colors.highlight}`,
+        padding: 40,
+        borderRadius: theme.radii.soft,
+        textAlign: 'center',
+        marginTop: 60
+      }}>
+        <h2 style={{ color: theme.colors.primary, marginTop: 0 }}>Campanhas em Andamento</h2>
+        <p style={{ color: theme.colors.text, fontSize: 18, maxWidth: 700, margin: '16px auto' }}>
+          Estamos sempre a arrecadar cimento e materiais básicos para a próxima obra. A sua ajuda constrói o próximo teto.
         </p>
-        <div style={{ marginTop: 8 }}>
-          <Carousel images={[
-            '/fotos/primeira1.jpg',
-            '/fotos/primeira2.jpg',
-            '/fotos/primeira3.jpg',
-            '/fotos/primeira4.jpg',
-            '/fotos/primeira5.jpg',
-            '/fotos/primeira6.jpg'
-          ]} height={300} autoPlayMs={0} />
+        <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap', marginTop: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 18, fontWeight: 700, color: theme.colors.primary }}>
+            <FaWhatsapp size={24} color="#25D366" /> (16) 99181-1811
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 18, fontWeight: 700, color: theme.colors.primary }}>
+            <FaEnvelope size={24} color={theme.colors.accent as string} /> ijbfranca@gmail.com
+          </div>
         </div>
-
-        <h3 style={{ color: theme.colors.primary, marginTop: 18 }}>Obra 2</h3>
-        <p style={{ color: theme.colors.text }}>
-          Em 23 de junho de 2018 entregamos a segunda casa do IJB à família da Sra. Raimunda, que tem sete filhos. O projeto,
-          elaborado por arquitetos e engenheiros voluntários, incluiu adaptações de acessibilidade, como circulação para cadeira de rodas.
-          Recebemos doações de revestimentos, granito, esquadrias e aquecedor solar, além do apoio de voluntários e empresas locais.
-          Agradecemos especialmente ao casal Teixeira e Martha pela doação do terreno.
-        </p>
-        <div style={{ marginTop: 8 }}>
-          <Carousel images={[
-            '/fotos/segunda1.jpg',
-            '/fotos/segunda2.jpg',
-            '/fotos/segunda3.jpg',
-            '/fotos/segunda4.jpg',
-            '/fotos/segunda5.jpg',
-            '/fotos/segunda6.jpg',
-            '/fotos/segunda7.jpg',
-            '/fotos/segunda8.jpg',
-            '/fotos/segunda9.jpg'
-          ]} height={300} autoPlayMs={0} />
-        </div>
-
-        <h3 style={{ color: theme.colors.primary, marginTop: 18 }}>Obra 3</h3>
-        <p style={{ color: theme.colors.text }}>
-          Obra iniciada após mobilização da comunidade para atender uma família que vivia em barraco de lona. O IJB coordenou a continuidade
-          dos trabalhos, captando doações de materiais, mobilizando mão de obra e oferecendo suporte técnico. A entrega simbólica ocorreu em 15/08/2020.
-        </p>
-        <div style={{ marginTop: 8 }}>
-          <Carousel images={['/fotos/terceira.jpg',
-            '/fotos/terceira2.jpg',
-            '/fotos/terceira3.jpg',
-            '/fotos/terceira4.jpg',
-            '/fotos/terceira5.jpg'
-          ]} height={300} autoPlayMs={0} />
-        </div>
-
-        <h3 style={{ color: theme.colors.primary, marginTop: 18 }}>Obra 4</h3>
-        <p style={{ color: theme.colors.text }}>
-          Em 17 de dezembro de 2024 entregamos a reforma da casa da Sra. Raquel, beneficiando seus filhos e netos. O projeto,
-          desenvolvido por arquitetos e engenheiros voluntários, priorizou iluminação, ventilação, acessibilidade e a criação de uma ampla varanda.
-          Com o apoio de parceiros recebemos doações e descontos em pisos, revestimentos, portas, janelas, pintura e telhado, o que permitiu
-          concluir a obra com qualidade e entregá‑la antes do Natal.
-        </p>
-        <p style={{ color: theme.colors.text }}>
-          Agradecemos aos voluntários, às empresas doadoras e a todos os parceiros: sem vocês este projeto não seria possível.
-        </p>
-        <div style={{ marginTop: 8 }}>
-          <Carousel images={['/fotos/quarta5.png',
-            '/fotos/quarta2.png',
-            '/fotos/quarta3.png',
-            '/fotos/quarta4.png',
-            '/fotos/quarta1.png'
-          ]} height={300} autoPlayMs={0} />
-        </div>
-
-        <h3 style={{ color: theme.colors.primary, marginTop: 18 }}>Obra 5</h3>
-        <p style={{ color: theme.colors.text }}>
-          Em dezembro de 2023 entregamos a casa da família da Caroline e seus três filhos. A iniciativa foi liderada pelo Grupo "Jantar por uma Boa Causa",
-          que indicou a família e organizou um jantar beneficente que arrecadou grande parte dos recursos. O terreno foi doado pelos irmãos Pedrosa, da Rede Drogafarma.
-        </p>
-        <p style={{ color: theme.colors.text }}>
-          O projeto, elaborado por arquitetos e engenheiros voluntários, resultou em uma casa ampla e bem ventilada, com espaços adequados para estudo das crianças.
-          Recebemos doações e descontos em pisos, revestimentos, portas, janelas, pintura e telhado, o que possibilitou a entrega antes do Natal.
-        </p>
-        <p style={{ color: theme.colors.text }}>
-          Agradecemos ao Grupo "Jantar por uma Boa Causa", ao Grupo Drogafarma pela doação do terreno, às empresas doadoras e a todos os voluntários envolvidos.
-        </p>
-        <div style={{ marginTop: 8 }}>
-          <Carousel images={['/fotos/quinta4.png',
-          '/fotos/quinta1.png', 
-            '/fotos/quinta2.png', 
-            '/fotos/quinta3.png',  
-            '/fotos/quinta5.png']} height={300} autoPlayMs={0} />
-        </div>
-
-        {/* Events moved to Home page */}
-
-        <h3 style={{ color: theme.colors.primary, marginTop: 16 }}>Campanhas em andamento</h3>
-        <p style={{ color: theme.colors.text }}>
-          O IJB mantém campanhas contínuas para arrecadação de materiais — em especial cimento — e de recursos financeiros.
-        </p>
-        <p style={{ color: theme.colors.text }}><strong>Para colaborar ou obter informações:</strong> 📞 (16) 99181-1811 • <a href="mailto:ijbfranca@gmail.com">ijbfranca@gmail.com</a></p>
       </section>
     </main>
   )

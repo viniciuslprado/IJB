@@ -84,6 +84,25 @@ button:focus-visible {
   box-shadow: 0 8px 20px rgba(0,0,0,0.04);
 }
 
+/* Hover interaction for elevating cards */
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* Apply hover effect only on devices that support hover (avoid touch devices) */
+@media (hover: hover) and (pointer: fine) {
+  .hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.10) !important;
+  }
+}
+
+/* Visible focus for keyboard users */
+button:focus-visible,
+.hover-card:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
