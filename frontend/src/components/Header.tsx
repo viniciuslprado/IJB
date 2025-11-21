@@ -46,10 +46,9 @@ export const Header: React.FC = () => {
 
           <nav style={navStyle} aria-label="main navigation">
             <Link to="/">Home</Link>
-            <Link to="/sobre">Sobre</Link>
+            <Link to="/sobre">Quem Somos</Link>
             <Link to="/projetos">Projetos</Link>
             <Link to="/ajudar">Como Ajudar</Link>
-            <Link to="/contato">Contato</Link>
             <div style={{ marginLeft: 8 }}>
               {/* Botão sempre visível e em destaque */}
               <BotaoCTA onClick={() => setDonateOpen(true)}>DOE AGORA</BotaoCTA>

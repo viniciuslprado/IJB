@@ -45,7 +45,8 @@ const Carousel: React.FC<CarouselProps> = ({ images, height = 220, autoPlayMs = 
         <img
           key={src + i}
           src={src}
-          alt={`slide-${i}`}
+          alt={`slide ${i + 1}`}
+          loading="lazy"
           style={{
             position: 'absolute',
             top: 0,

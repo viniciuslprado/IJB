@@ -2,12 +2,13 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
-import Sobre from './pages/Sobre'
+import Sobre from './pages/QuemSomos'
 import Projetos from './pages/Projetos'
 import ComoAjudar from './pages/ComoAjudar'
-import Contato from './pages/Contato'
+// Contato page removed — contact info is now in the footer and site-wide
 // import ObrasRealizadas from './pages/ObrasRealizadas'
 import './App.css'
+import Footer from './components/Footer'
 
 const App: React.FC = () => {
   return (
@@ -20,9 +21,9 @@ const App: React.FC = () => {
           <Route path="/projetos" element={<Projetos />} />
           <Route path="/ajudar" element={<ComoAjudar />} />
             {/* <Route path="/obras" element={<ObrasRealizadas />} /> */}
-          <Route path="/contato" element={<Contato />} />
         </Routes>
       </div>
+      <Footer />
     </BrowserRouter>
   )
 }

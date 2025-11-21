@@ -1,7 +1,7 @@
 import React from 'react'
 import { theme } from '../styles/theme'
 
-const Sobre: React.FC = () => {
+const QuemSomos: React.FC = () => {
   return (
     <main style={{ padding: 20 }}>
       <h1 style={{ color: theme.colors.primary }}>Sobre o Instituto João de Barros</h1>
@@ -30,9 +30,23 @@ const Sobre: React.FC = () => {
       <section style={{ marginTop: 20, maxWidth: 800 }}>
         <h2 style={{ color: theme.colors.primary }}>Nossa missão</h2>
         <p style={{ color: theme.colors.text }}>Promover dignidade por meio de educação, acolhimento, capacitação e moradia digna.</p>
+        <div style={{ marginTop: 12 }}>
+          <p style={{ color: theme.colors.text, margin: 0 }}><strong>Movimento criado por voluntários da cidade de Franca.</strong></p>
+          <p style={{ color: theme.colors.text, marginTop: 6 }}><strong>Nossa missão é transformar vidas por meio de moradia digna.</strong></p>
+          <p style={{ color: theme.colors.text, marginTop: 6 }}><strong>Acreditamos no poder da comunidade.</strong></p>
+        </div>
+      </section>
+      <section style={{ marginTop: 20, maxWidth: 800 }}>
+        <h2 style={{ color: theme.colors.primary }}>Participação e eventos</h2>
+        <p style={{ color: theme.colors.text }}>
+          O Instituto organiza e participa de eventos beneficentes que são fundamentais para angariar recursos e aproximar a comunidade: entre eles o evento de Hipismo, ações promovidas pela Loja Maçônica Pedra da Luz, e diversas parcerias e campanhas de arrecadação.
+        </p>
+        <p style={{ color: theme.colors.text }}>
+          Muitas ações dependem do apoio de voluntários e da participação ativa da comunidade de Franca. Publicações e postagens antigas do Instituto agradecem regularmente colaboradores e voluntários que tornam os projetos possíveis.
+        </p>
       </section>
     </main>
   )
 }
 
-export default Sobre
+export default QuemSomos

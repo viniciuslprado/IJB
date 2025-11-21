@@ -127,7 +127,17 @@ const ComoAjudar: React.FC = () => {
 
   useEffect(() => {
     const t = searchParams.get('type')
-    if (t) setSelectedType(t)
+    if (t) {
+      // support opening the money/material flows via ?type=dinheiro|material
+      // and opening the volunteer form via ?type=voluntario
+      if (t === 'voluntario' || t === 'voluntário') {
+        setShowVolunteerForm(true)
+        setSelectedType(null)
+      } else {
+        setSelectedType(t)
+        setShowVolunteerForm(false)
+      }
+    }
   }, [searchParams])
 
   const currentType = selectedType || null
