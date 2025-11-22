@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Tipografia */
   --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -11,6 +15,7 @@
   --color-accent: #be5838;
   --color-secondary: #678b64; /* verde musgo */
   --color-brown-warm: #573c2c;
+  /* footer rules removed (migrated to Tailwind utilities in components) */
   --color-green-soft: #6a8e67;
   --color-orange-soft: #e77b5b;
   --color-orange-strong: #e96b46;
@@ -115,3 +120,6 @@ button:focus-visible,
     background-color: var(--color-primary);
   }
 }
+
+/* legacy footer CSS removed — footer now styled with Tailwind in components */
+
