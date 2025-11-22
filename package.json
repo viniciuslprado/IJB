@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "npm --prefix frontend run dev",
-    "build": "npm --prefix frontend install --include=dev && npm --prefix frontend run build",
+    "build": "npm --prefix frontend install --include=dev --legacy-peer-deps && npm --prefix frontend run build",
     "speed-insights": "npm --prefix frontend run speed-insights",
-    "install:frontend": "npm --prefix frontend install --include=dev",
+    "install:frontend": "npm --prefix frontend install --include=dev --legacy-peer-deps",
     "start": "npm run dev"
   }
 }
