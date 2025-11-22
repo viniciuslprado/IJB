@@ -135,7 +135,7 @@
   .footer-grid { gap: 12px; display: none !important; }
   .footer-bottom {
     margin: 16px auto 0 !important;
-    padding: 12px 16px 0 !important;
+    padding: 18px 22px 4px !important; /* extra espaçamento para desgrudar da borda */
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
