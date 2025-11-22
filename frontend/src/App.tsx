@@ -9,7 +9,6 @@ import ComoAjudar from './pages/ComoAjudar'
 import NotFound from './pages/NotFound'
 // Contato page removed — contact info is site-wide
 // import ObrasRealizadas from './pages/ObrasRealizadas'
-import './App.css'
 import Footer from './components/Footer'
 
 const App: React.FC = () => {
@@ -17,7 +16,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <ScrollToTop />
       <Header />
-      <div className="site-wrapper">
+      <div className="max-w-[1280px] mx-auto px-6 py-6">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sobre" element={<Sobre />} />

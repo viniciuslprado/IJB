@@ -17,7 +17,18 @@ module.exports = {
         'orange-strong': '#e96b46',
         highlight: '#fbc046',
         text: '#2E2E2E',
-        muted: '#6B6B6B'
+        muted: '#6B6B6B',
+        background: '#faf5f1'
+      }
+    ,
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
+        }
+      },
+      animation: {
+        'fade-up': 'fade-up 360ms ease-out both'
       }
     },
   },
