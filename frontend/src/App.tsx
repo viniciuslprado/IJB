@@ -7,7 +7,7 @@ import Sobre from './pages/QuemSomos'
 import Projetos from './pages/Projetos'
 import ComoAjudar from './pages/ComoAjudar'
 import NotFound from './pages/NotFound'
-// Contato page removed — contact info is now in the footer and site-wide
+// Contato page removed — contact info is site-wide
 // import ObrasRealizadas from './pages/ObrasRealizadas'
 import './App.css'
 
