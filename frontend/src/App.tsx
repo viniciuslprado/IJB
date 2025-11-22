@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound'
 // Contato page removed — contact info is site-wide
 // import ObrasRealizadas from './pages/ObrasRealizadas'
 import './App.css'
+import Footer from './components/Footer'
 
 const App: React.FC = () => {
   return (
@@ -27,7 +28,7 @@ const App: React.FC = () => {
             {/* <Route path="/obras" element={<ObrasRealizadas />} /> */}
         </Routes>
       </div>
-      
+      <Footer />
     </BrowserRouter>
   )
 }
