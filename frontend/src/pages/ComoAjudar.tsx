@@ -228,7 +228,7 @@ const ComoAjudar: React.FC = () => {
       <Helmet>
         <title>Como Ajudar | Instituto João de Barros</title>
       </Helmet>
-      <main style={{ padding: '40px 20px', maxWidth: 900, margin: '0 auto', minHeight: '80vh' }}>
+      <main className="main-container" style={{ maxWidth: 900, margin: '0 auto', minHeight: '80vh' }}>
         
         <section style={{ textAlign: 'center', marginBottom: 40 }}>
           <h1 style={{ color: theme.colors.primary, fontSize: '2.5rem', marginBottom: 16 }}>Faça parte desta construção</h1>
