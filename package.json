@@ -8,5 +8,8 @@
     "speed-insights": "npm --prefix frontend run speed-insights",
     "install:frontend": "npm --prefix frontend install --include=dev --legacy-peer-deps",
     "start": "npm run dev"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.2.0"
   }
 }
