@@ -66,15 +66,11 @@ const Footer: React.FC = () => {
         alignItems: 'center',
         gap: 16,
         fontSize: 13,
-        color: 'rgba(255,255,255,0.5)'
+        color: 'rgba(255,255,255,0.6)'
       }}>
-        <div>
-          © {new Date().getFullYear()} Instituto João de Barros. Todos os direitos reservados.
-        </div>
-        <div className="cnpj" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span>CNPJ:</span>
-          <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 14 }}>26.345.732/0001-07</span>
-        </div>
+        <div className="copyright">© {new Date().getFullYear()} Instituto João de Barros. Todos os direitos reservados.</div>
+        <div className="cnpj-label">CNPJ:</div>
+        <div className="cnpj-number" style={{ color: '#fff', fontFamily: 'monospace', fontSize: 14 }}>26.345.732/0001-07</div>
       </div>
     </footer>
   )
