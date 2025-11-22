@@ -12,7 +12,7 @@ const QuemSomos: React.FC = () => {
       </Helmet>
       <main style={{ padding: '40px 20px', maxWidth: 1000, margin: '0 auto' }}>
         <section style={{ textAlign: 'center', marginBottom: 50 }}>
-          <h1 style={{ color: theme.colors.primary, fontSize: '3rem', marginBottom: 16 }}>Quem Somos</h1>
+          <h1 className="main-hero-title" style={{ color: theme.colors.primary, marginBottom: 16 }}>Quem Somos</h1>
           <p style={{ maxWidth: 720, margin: '0 auto', fontSize: '1.1rem', lineHeight: 1.6, color: theme.colors.text }}>
             O Instituto João de Barros, de Franca-SP, atua na construção de oportunidades para
             famílias e crianças. Inspirados pelo comportamento do joão-de-barro, buscamos oferecer
@@ -21,7 +21,7 @@ const QuemSomos: React.FC = () => {
         </section>
 
         <section style={{ marginBottom: 60 }}>
-          <h2 style={{ textAlign: 'center', color: theme.colors.primary, marginBottom: 30 }}>Nossa Missão</h2>
+          <h2 className="section-title" style={{ textAlign: 'center', color: theme.colors.primary, marginBottom: 30 }}>Nossa Missão</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
             <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: 12, textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
               <div style={{ background: '#EFEBE9', width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
@@ -51,7 +51,7 @@ const QuemSomos: React.FC = () => {
 
         <section style={{ background: '#fff', padding: 40, borderRadius: theme.radii.soft, boxShadow: '0 4px 20px rgba(0,0,0,0.03)', marginBottom: 40 }}>
           <div style={{ maxWidth: 800, margin: '0 auto' }}>
-            <h2 style={{ color: theme.colors.primary, marginTop: 0 }}>O que fazemos</h2>
+            <h2 className="section-title" style={{ color: theme.colors.primary, marginTop: 0 }}>O que fazemos</h2>
             <p style={{ lineHeight: 1.6, color: theme.colors.text }}>
               Somos uma associação de voluntários que organiza reformas e construções para
               famílias em situação de vulnerabilidade. Trabalhamos com doações de materiais,
@@ -71,7 +71,7 @@ const QuemSomos: React.FC = () => {
         </section>
 
         <section style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <h2 style={{ color: theme.colors.primary }}>Participação e Eventos</h2>
+          <h2 className="section-title" style={{ color: theme.colors.primary }}>Participação e Eventos</h2>
           <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', marginTop: 12, flexWrap: 'wrap' }}>
             <div style={{ flex: '1 1 360px' }}>
               <p style={{ lineHeight: 1.6, color: theme.colors.text }}>

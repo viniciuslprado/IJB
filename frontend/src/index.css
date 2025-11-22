@@ -66,6 +66,7 @@ button {
   background-color: var(--color-primary);
   color: #fff;
   cursor: pointer;
+  min-height: 44px;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 button:hover {

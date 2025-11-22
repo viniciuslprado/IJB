@@ -11,15 +11,12 @@ const colStyle: React.CSSProperties = {
 
 const Footer: React.FC = () => {
   return (
-    <footer style={{
+    <footer className="site-footer" style={{
       background: theme.colors.primary,
       color: '#fff',
-      marginTop: 60,
-      paddingTop: 60,
-      paddingBottom: 20,
       borderTop: `4px solid ${theme.colors.accent}`
     }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20, alignItems: 'start' }}>
+      <div className="footer-grid" style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', alignItems: 'start' }}>
         <div style={colStyle}>
           <div style={{ fontWeight: 800, color: '#fff' }}>Instituto João de Barros</div>
           <div style={{ color: '#fff', fontSize: 14 }}>Franca — SP</div>
@@ -58,7 +55,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       {/* RODAPÉ INFERIOR: Copyright & CNPJ */}
-      <div style={{ 
+      <div className="footer-bottom" style={{ 
         maxWidth: 1100, 
         margin: '40px auto 0', 
         padding: '20px 20px 0', 
@@ -74,7 +71,7 @@ const Footer: React.FC = () => {
         <div>
           © {new Date().getFullYear()} Instituto João de Barros. Todos os direitos reservados.
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <div className="cnpj" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <span>CNPJ:</span>
           <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 14 }}>26.345.732/0001-07</span>
         </div>

@@ -81,21 +81,30 @@ const Carousel: React.FC<CarouselProps> = ({ images, height = 220, autoPlayMs = 
             <FaChevronRight size={isMobile ? 18 : 20} />
           </CarouselNavButton>
 
-          <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: 8, display: 'flex', gap: 6 }}>
+          {/* --- Indicadores (Bolinhas) --- */}
+          <div style={{ position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8, zIndex: 10 }}>
             {images.map((_, i) => (
               <button
                 key={i}
-                aria-label={`go-to-${i}`}
                 onClick={() => setIndex(i)}
                 style={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 10,
+                  width: 12,
+                  height: 12,
+                  borderRadius: 999,
                   border: 'none',
-                  background: i === index ? theme.colors.primary : 'rgba(255,255,255,0.5)',
+                  background: i === index ? '#fbc046' : 'rgba(255,255,255,0.6)',
                   cursor: 'pointer',
+                  transition: 'all 300ms ease',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
                   padding: 0
                 }}
+                onMouseEnter={(e) => {
+                  if (i !== index) e.currentTarget.style.background = 'rgba(255,255,255,1)'
+                }}
+                onMouseLeave={(e) => {
+                  if (i !== index) e.currentTarget.style.background = 'rgba(255,255,255,0.6)'
+                }}
+                aria-label={`Ir para imagem ${i + 1}`}
               />
             ))}
           </div>

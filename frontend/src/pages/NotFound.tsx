@@ -16,7 +16,7 @@ const NotFound: React.FC = () => {
 
       <div style={{ maxWidth: 880, textAlign: 'center' }}>
         <div style={{ fontSize: 88, fontWeight: 900, color: theme.colors.accent, lineHeight: 1 }}>404</div>
-        <h1 style={{ marginTop: 8, color: theme.colors.primary }}>Página não encontrada</h1>
+        <h1 className="main-hero-title" style={{ marginTop: 8, color: theme.colors.primary }}>Página não encontrada</h1>
         <p style={{ color: theme.colors.text, marginTop: 8, fontSize: 16 }}>
           A página que você está procurando não existe ou foi movida. Verifique o endereço ou retorne para a página inicial.
         </p>

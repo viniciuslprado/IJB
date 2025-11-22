@@ -49,9 +49,8 @@ const Home: React.FC = () => {
           }}>
             Moradia Digna
           </div>
-          <h1 style={{
+          <h1 className="main-hero-title" style={{
             color: theme.colors.primary,
-            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
             fontWeight: 800,
             lineHeight: 1.1,
             marginBottom: 16
@@ -79,7 +78,7 @@ const Home: React.FC = () => {
       </section>
 
       <section style={{ marginTop: 40 }} aria-labelledby="impacto-heading">
-        <h2 id="impacto-heading" style={{ color: theme.colors.primary }}>Impacto em Números</h2>
+        <h2 id="impacto-heading" className="section-title" style={{ color: theme.colors.primary }}>Impacto em Números</h2>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 6, marginBottom: 20 }}>
           <p style={{ color: theme.colors.text, margin: 0, fontSize: 14 }}>Dados oficiais consolidados pela equipe.</p>
         </div>
@@ -119,7 +118,7 @@ const Home: React.FC = () => {
       </section>
 
       <section style={{ marginTop: 60 }}>
-        <h3 style={{ color: theme.colors.primary, fontSize: 28 }}>Como Você Pode Ajudar</h3>
+        <h3 className="section-title" style={{ color: theme.colors.primary }}>Como Você Pode Ajudar</h3>
         <p style={{ color: theme.colors.text, maxWidth: 760, marginBottom: 30 }}>
           Três formas simples de contribuir com o Instituto.
         </p>
@@ -206,7 +205,7 @@ const Home: React.FC = () => {
       </section>
 
       <section style={{ marginTop: 28 }}>
-        <h2 style={{ color: theme.colors.primary }}>Nossos projetos</h2>
+        <h2 className="section-title" style={{ color: theme.colors.primary }}>Nossos projetos</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px,1fr))', gap: 16 }}>
           <article className="hover-card" style={{ background: '#fff', padding: 16, borderRadius: theme.radii.soft, boxShadow: '0 6px 18px rgba(0,0,0,0.04)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -265,7 +264,7 @@ const Home: React.FC = () => {
         </section>
 
         <section style={{ marginTop: 16 }}>
-          <h3 style={{ color: theme.colors.primary }}>Hipismo</h3>
+          <h3 className="section-subtitle" style={{ color: theme.colors.primary }}>Hipismo</h3>
           <p style={{ color: theme.colors.text, maxWidth: 760 }}>
             O evento de Hipismo foi um grande sucesso: o público compareceu em bom número e o ambiente foi acolhedor e familiar. Agradecemos ao Equestrian Center Franca pela generosa cessão do espaço e à Loja Maçônica Pedra da Luz, cuja equipe assumiu a organização e a administração da lanchonete — chegando a custear os comes e bebes, de modo que toda a receita foi revertida ao Instituto João de Barros.
           </p>

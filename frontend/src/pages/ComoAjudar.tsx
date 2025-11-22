@@ -231,7 +231,7 @@ const ComoAjudar: React.FC = () => {
       <main className="main-container" style={{ maxWidth: 900, margin: '0 auto', minHeight: '80vh' }}>
         
         <section style={{ textAlign: 'center', marginBottom: 40 }}>
-          <h1 style={{ color: theme.colors.primary, fontSize: '2.5rem', marginBottom: 16 }}>Faça parte desta construção</h1>
+          <h1 className="main-hero-title" style={{ color: theme.colors.primary, marginBottom: 16 }}>Faça parte desta construção</h1>
           <p style={{ maxWidth: 600, margin: '0 auto', color: theme.colors.text, fontSize: '1.1rem' }}>
             Escolha como prefere contribuir. Cada tijolo, cada real e cada hora de trabalho contam.
           </p>
