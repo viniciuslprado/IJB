@@ -64,9 +64,9 @@ const Footer: React.FC = () => {
 
       {/* Bottom bar - always visible. Mobile: stacked center; Desktop: single row justify-between */}
       <div className="w-full border-t border-white/10">
-        <div className="max-w-6xl mx-auto px-5 py-6 flex flex-col items-center text-center md:flex-row md:justify-between md:items-center md:text-sm gap-2">
-          <span className="block text-white">© {new Date().getFullYear()} Inst. João de Barros</span>
-          <span className="block font-mono text-white">CNPJ: 26.345.732/0001-07</span>
+        <div className="max-w-6xl mx-auto px-5 py-6 flex flex-row justify-between items-center text-sm gap-2">
+          <span className="text-white text-sm">© {new Date().getFullYear()} Inst. João de Barros</span>
+          <span className="font-mono text-white text-sm">CNPJ: 26.345.732/0001-07</span>
         </div>
       </div>
 
