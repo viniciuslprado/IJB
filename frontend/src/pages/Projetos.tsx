@@ -21,7 +21,7 @@ const ProjectRow: React.FC<{
     marginBottom: 80
   }}>
     <div style={{ flex: '1 1 400px', minWidth: 300 }}>
-      <h3 className="section-subtitle" style={{ color: theme.colors.primary, marginBottom: 4 }}>{title}</h3>
+      <h3 style={{ color: theme.colors.primary, marginBottom: 4, fontSize: '1.8rem' }}>{title}</h3>
       {subtitle && (
         <span style={{ display: 'inline-block', background: '#F7F7F7', color: theme.colors.text, fontSize: 14, fontWeight: 600, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{subtitle}</span>
       )}
@@ -44,7 +44,7 @@ const Projetos: React.FC = () => {
         <meta name="description" content="Veja as obras e reformas realizadas pelo Instituto João de Barros para famílias em Franca-SP." />
       </Helmet>
       <section style={{ textAlign: 'center', marginBottom: 60 }}>
-        <h1 className="main-hero-title" style={{ color: theme.colors.primary }}>Nossos Projetos</h1>
+        <h1 style={{ color: theme.colors.primary, fontSize: '3rem' }}>Nossos Projetos</h1>
         <p style={{ maxWidth: 700, margin: '0 auto', color: theme.colors.text, fontSize: '1.1rem' }}>
           Transformamos vidas tijolo a tijolo. Conheça algumas das histórias que ajudámos a construir.
         </p>
@@ -112,7 +112,7 @@ const Projetos: React.FC = () => {
         textAlign: 'center',
         marginTop: 60
       }}>
-        <h2 className="section-title" style={{ color: theme.colors.primary, marginTop: 0 }}>Campanhas em Andamento</h2>
+        <h2 style={{ color: theme.colors.primary, marginTop: 0 }}>Campanhas em Andamento</h2>
         <p style={{ color: theme.colors.text, fontSize: 18, maxWidth: 700, margin: '16px auto' }}>
           Estamos sempre a arrecadar cimento e materiais básicos para a próxima obra. A sua ajuda constrói o próximo teto.
         </p>

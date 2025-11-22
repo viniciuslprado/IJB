@@ -4,13 +4,12 @@ import { theme } from '../styles/theme'
 import BotaoCTA from '../components/ui/BotaoCTA'
 import DonationModal from '../components/ui/DonationModal'
 import Carousel from '../components/ui/Carousel'
-import Button from '../components/ui/Button'
 import { FaBoxOpen, FaArrowRight, FaHandHoldingHeart, FaCalendarAlt, FaHome, FaHandshake, FaGlassCheers } from 'react-icons/fa'
 
 // heroStyle removed (unused) — estilos aplicados inline onde necessário
 
 const Home: React.FC = () => {
-  
+
   const [donateOpen, setDonateOpen] = useState(false)
   const heroImage = '/fotos/instituto.png'
   return (
@@ -50,8 +49,9 @@ const Home: React.FC = () => {
           }}>
             Moradia Digna
           </div>
-          <h1 className="main-hero-title" style={{
+          <h1 style={{
             color: theme.colors.primary,
+            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
             fontWeight: 800,
             lineHeight: 1.1,
             marginBottom: 16
@@ -79,7 +79,7 @@ const Home: React.FC = () => {
       </section>
 
       <section style={{ marginTop: 40 }} aria-labelledby="impacto-heading">
-        <h2 id="impacto-heading" className="section-title" style={{ color: theme.colors.primary }}>Impacto em Números</h2>
+        <h2 id="impacto-heading" style={{ color: theme.colors.primary }}>Impacto em Números</h2>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 6, marginBottom: 20 }}>
           <p style={{ color: theme.colors.text, margin: 0, fontSize: 14 }}>Dados oficiais consolidados pela equipe.</p>
         </div>
@@ -93,7 +93,15 @@ const Home: React.FC = () => {
           ].map((item, idx) => (
             <div
               key={idx}
-              className="hover-card bg-white p-6 rounded-[12px] text-center shadow-md border-t-4 border-accent"
+              className="hover-card"
+              style={{
+                background: '#fff',
+                padding: 24,
+                borderRadius: theme.radii.soft,
+                textAlign: 'center',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                borderTop: `4px solid ${theme.colors.accent}` // Um toque de cor no topo
+              }}
             >
               {/* AQUI: Cor de destaque nos números */}
               <div style={{ fontSize: 42, fontWeight: 900, color: theme.colors.accent, lineHeight: 1 }}>
@@ -111,14 +119,14 @@ const Home: React.FC = () => {
       </section>
 
       <section style={{ marginTop: 60 }}>
-        <h3 className="section-title" style={{ color: theme.colors.primary }}>Como Você Pode Ajudar</h3>
+        <h3 style={{ color: theme.colors.primary, fontSize: 28 }}>Como Você Pode Ajudar</h3>
         <p style={{ color: theme.colors.text, maxWidth: 760, marginBottom: 30 }}>
           Três formas simples de contribuir com o Instituto.
         </p>
-        
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
           {/* Card 1: Materiais */}
-          <div className="hover-card bg-white p-6 rounded-[12px] shadow-md flex flex-col items-start">
+          <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: theme.radii.soft, boxShadow: '0 4px 20px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <div style={{ background: '#FFF4E5', padding: 12, borderRadius: 12, marginBottom: 16 }}>
               <FaBoxOpen size={32} color={theme.colors.orangeStrong} />
             </div>
@@ -127,14 +135,24 @@ const Home: React.FC = () => {
               Cimento, revestimentos, portas e itens de construção são essenciais para nossas obras.
             </p>
             <a href="/ajudar?type=material#doacoes" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
-              <Button variant="outline" className="w-full border-2 border-orange-strong text-orange-strong gap-2 px-3 py-2 inline-flex items-center justify-center">
+              <button style={{
+                width: '100%',
+                padding: '10px',
+                background: 'transparent',
+                border: `2px solid ${theme.colors.orangeStrong}`, // Borda colorida
+                color: theme.colors.orangeStrong,
+                borderRadius: 8,
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
+              }}>
                 Saiba como <FaArrowRight size={12} />
-              </Button>
+              </button>
             </a>
           </div>
 
           {/* Card 2: Voluntário */}
-          <div className="hover-card bg-white p-6 rounded-[12px] shadow-md flex flex-col items-start">
+          <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: theme.radii.soft, boxShadow: '0 4px 20px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <div style={{ background: '#E8F5E9', padding: 12, borderRadius: 12, marginBottom: 16 }}>
               <FaHandHoldingHeart size={32} color={theme.colors.secondary} />
             </div>
@@ -143,14 +161,24 @@ const Home: React.FC = () => {
               Mãos à obra: profissionais e ajudantes são a força que move as nossas reformas.
             </p>
             <a href="/ajudar?type=voluntario#doacoes" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
-              <Button variant="outline" className="w-full border-2 border-secondary text-secondary gap-2 px-3 py-2 inline-flex items-center justify-center">
+              <button style={{
+                width: '100%',
+                padding: '10px',
+                background: 'transparent',
+                border: `2px solid ${theme.colors.secondary}`,
+                color: theme.colors.secondary,
+                borderRadius: 8,
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
+              }}>
                 Quero ajudar <FaArrowRight size={12} />
-              </Button>
+              </button>
             </a>
           </div>
 
           {/* Card 3: Doar dinheiro (substituído de 'Eventos') */}
-          <div className="hover-card bg-white p-6 rounded-[12px] shadow-md flex flex-col items-start">
+          <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: theme.radii.soft, boxShadow: '0 4px 20px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <div style={{ background: '#FFF8E1', padding: 12, borderRadius: 12, marginBottom: 16 }}>
               <FaCalendarAlt size={32} color={theme.colors.highlight} />
             </div>
@@ -159,18 +187,28 @@ const Home: React.FC = () => {
               Contribua financeiramente para apoiar nossas obras e ações sociais.
             </p>
             <div style={{ marginTop: 16, width: '100%' }}>
-              <Button variant="outline" className="w-full border-2 border-highlight text-highlight gap-2 px-3 py-2 inline-flex items-center justify-center" onClick={() => setDonateOpen(true)}>
+              <button onClick={() => setDonateOpen(true)} style={{
+                width: '100%',
+                padding: '10px',
+                background: 'transparent',
+                border: `2px solid ${theme.colors.highlight}`,
+                color: theme.colors.highlight,
+                borderRadius: 8,
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
+              }}>
                 Doar agora <FaArrowRight size={12} />
-              </Button>
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       <section style={{ marginTop: 28 }}>
-        <h2 className="section-title" style={{ color: theme.colors.primary }}>Nossos projetos</h2>
+        <h2 style={{ color: theme.colors.primary }}>Nossos projetos</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px,1fr))', gap: 16 }}>
-          <article className="hover-card bg-white p-4 rounded-[12px] shadow-sm">
+          <article className="hover-card" style={{ background: '#fff', padding: 16, borderRadius: theme.radii.soft, boxShadow: '0 6px 18px rgba(0,0,0,0.04)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <div style={{ fontSize: 28, color: theme.colors.brownWarm }}><FaHome /></div>
               <h3 style={{ margin: 0, color: theme.colors.primary }}>Obras</h3>
@@ -178,14 +216,14 @@ const Home: React.FC = () => {
             <p style={{ marginTop: 8, color: theme.colors.text }}>Obras e melhorias habitacionais para famílias em vulnerabilidade.</p>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <a href="/projetos#obras" style={{ textDecoration: 'none' }}>
-                <Button variant="outline" className="px-3 py-2 border border-brown-warm text-brown-warm inline-flex items-center gap-2">
+                <button style={{ padding: '8px 12px', borderRadius: 8, background: 'transparent', color: theme.colors.brownWarm, border: `1px solid ${theme.colors.brownWarm}`, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
                   Saiba mais <FaArrowRight size={12} />
-                </Button>
+                </button>
               </a>
             </div>
           </article>
 
-          <article className="hover-card bg-white p-4 rounded-[12px] shadow-sm">
+          <article className="hover-card" style={{ background: '#fff', padding: 16, borderRadius: theme.radii.soft, boxShadow: '0 6px 18px rgba(0,0,0,0.04)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <div style={{ fontSize: 28, color: theme.colors.highlight }}><FaGlassCheers /></div>
               <h3 style={{ margin: 0, color: theme.colors.primary }}>Eventos</h3>
@@ -193,14 +231,14 @@ const Home: React.FC = () => {
             <p style={{ marginTop: 8, color: theme.colors.text }}>Eventos de arrecadação e mobilização que financiam nossos projetos.</p>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <a href="/#eventos" style={{ textDecoration: 'none' }}>
-                <Button variant="outline" className="px-3 py-2 border border-highlight text-highlight inline-flex items-center gap-2">
+                <button style={{ padding: '8px 12px', borderRadius: 8, background: 'transparent', color: theme.colors.highlight, border: `1px solid ${theme.colors.highlight}`, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
                   Saiba mais <FaArrowRight size={12} />
-                </Button>
+                </button>
               </a>
             </div>
           </article>
 
-          <article className="hover-card bg-white p-4 rounded-[12px] shadow-sm">
+          <article className="hover-card" style={{ background: '#fff', padding: 16, borderRadius: theme.radii.soft, boxShadow: '0 6px 18px rgba(0,0,0,0.04)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <div style={{ fontSize: 28, color: theme.colors.brownWarm }}><FaHandshake /></div>
               <h3 style={{ margin: 0, color: theme.colors.primary }}>Parcerias</h3>
@@ -208,9 +246,9 @@ const Home: React.FC = () => {
             <p style={{ marginTop: 8, color: theme.colors.text }}>Parcerias com empresas para doação de materiais e serviços.</p>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <a href="/ajudar#doacoes" style={{ textDecoration: 'none' }}>
-                <Button variant="outline" className="px-3 py-2 border border-brown-warm text-brown-warm inline-flex items-center gap-2">
+                <button style={{ padding: '8px 12px', borderRadius: 8, background: 'transparent', color: theme.colors.brownWarm, border: `1px solid ${theme.colors.brownWarm}`, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
                   Saiba mais <FaArrowRight size={12} />
-                </Button>
+                </button>
               </a>
             </div>
           </article>
@@ -227,7 +265,7 @@ const Home: React.FC = () => {
         </section>
 
         <section style={{ marginTop: 16 }}>
-          <h3 className="section-subtitle" style={{ color: theme.colors.primary }}>Hipismo</h3>
+          <h3 style={{ color: theme.colors.primary }}>Hipismo</h3>
           <p style={{ color: theme.colors.text, maxWidth: 760 }}>
             O evento de Hipismo foi um grande sucesso: o público compareceu em bom número e o ambiente foi acolhedor e familiar. Agradecemos ao Equestrian Center Franca pela generosa cessão do espaço e à Loja Maçônica Pedra da Luz, cuja equipe assumiu a organização e a administração da lanchonete — chegando a custear os comes e bebes, de modo que toda a receita foi revertida ao Instituto João de Barros.
           </p>
