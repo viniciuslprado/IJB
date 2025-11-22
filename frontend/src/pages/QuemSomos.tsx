@@ -1,5 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
+import Button from '../components/ui/Button'
 import { theme } from '../styles/theme'
 import { FaInstagram, FaHammer, FaHandHoldingHeart, FaUsers } from 'react-icons/fa'
 
@@ -23,7 +24,7 @@ const QuemSomos: React.FC = () => {
         <section style={{ marginBottom: 60 }}>
           <h2 className="section-title" style={{ textAlign: 'center', color: theme.colors.primary, marginBottom: 30 }}>Nossa Missão</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
-            <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: 12, textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+            <div className="hover-card bg-white p-6 rounded-[12px] text-center shadow-md">
               <div style={{ background: '#EFEBE9', width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <FaHammer size={24} color={theme.colors.brownWarm} />
               </div>
@@ -31,7 +32,7 @@ const QuemSomos: React.FC = () => {
               <p style={{ fontSize: 14, color: theme.colors.text }}>Reformamos e construímos lares para garantir segurança física e emocional.</p>
             </div>
 
-            <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: 12, textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+            <div className="hover-card bg-white p-6 rounded-[12px] text-center shadow-md">
               <div style={{ background: '#E8F5E9', width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <FaHandHoldingHeart size={24} color={theme.colors.secondary} />
               </div>
@@ -39,7 +40,7 @@ const QuemSomos: React.FC = () => {
               <p style={{ fontSize: 14, color: theme.colors.text }}>Oferecemos acompanhamento social e capacitação profissional às famílias.</p>
             </div>
 
-            <div className="hover-card" style={{ background: '#fff', padding: 24, borderRadius: 12, textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+            <div className="hover-card bg-white p-6 rounded-[12px] text-center shadow-md">
               <div style={{ background: '#FFF8E1', width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <FaUsers size={24} color={theme.colors.highlight} />
               </div>
@@ -61,10 +62,10 @@ const QuemSomos: React.FC = () => {
 
             <div style={{ marginTop: 24 }}>
               <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
-                <button style={{ padding: '10px 20px', borderRadius: 8, background: 'transparent', border: `2px solid #C13584`, color: '#C13584', fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, transition: 'all 0.2s' }}>
+                <Button variant="outline" className="border-[#C13584] text-[#C13584] px-4 py-2 inline-flex items-center gap-2 transition-all">
                   <FaInstagram size={20} />
                   Siga-nos no Instagram
-                </button>
+                </Button>
               </a>
             </div>
           </div>

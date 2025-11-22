@@ -3,40 +3,10 @@ import { Helmet } from 'react-helmet-async'
 import emailjs from '@emailjs/browser'
 import { useSearchParams } from 'react-router-dom'
 import { theme } from '../styles/theme'
+import Button from '../components/ui/Button'
+import Input from '../components/ui/Input'
+import TextArea from '../components/ui/TextArea'
 import { FaHandHoldingUsd, FaTools, FaHandsHelping, FaCopy, FaCheckCircle, FaWhatsapp, FaUniversity } from 'react-icons/fa'
-
-// --- Subcomponentes de UI (Inputs) ---
-const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
-  <input
-    {...props}
-    style={{
-      width: '100%',
-      padding: '12px 16px',
-      borderRadius: 8,
-      border: '1px solid #ddd',
-      fontSize: '16px',
-      outlineColor: theme.colors.primary,
-      marginTop: 6
-    }}
-  />
-)
-
-const TextArea = (props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) => (
-  <textarea
-    {...props}
-    style={{
-      width: '100%',
-      padding: '12px 16px',
-      borderRadius: 8,
-      border: '1px solid #ddd',
-      fontSize: '16px',
-      outlineColor: theme.colors.primary,
-      minHeight: 100,
-      marginTop: 6,
-      resize: 'vertical'
-    }}
-  />
-)
 
 // --- Copy Button Helper (replaces alert-based copy buttons) ---
 const CopyButton: React.FC<{ textToCopy: string, label?: string }> = ({ textToCopy, label = 'Copiar' }) => {
@@ -128,10 +98,10 @@ const MaterialForm: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
       </div>
       
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginTop: 8 }}>
-        <button type="button" onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: theme.colors.muted }}>Cancelar</button>
-        <button type="submit" disabled={status === 'sending'} style={{ padding: '10px 24px', borderRadius: 8, background: theme.colors.orangeStrong, color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer', opacity: status === 'sending' ? 0.7 : 1 }}>
+        <Button variant="ghost" className="text-muted" type="button" onClick={onClose}>Cancelar</Button>
+        <Button className="px-6 py-2 bg-orange-strong text-white" type="submit" disabled={status === 'sending'}>
           {status === 'sending' ? 'Enviando...' : 'Confirmar Doação'}
-        </button>
+        </Button>
       </div>
     </form>
   )
@@ -191,11 +161,11 @@ const VoluntarioForm: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
         <TextArea value={skills} onChange={(e) => setSkills(e.target.value)} required placeholder="Ex: Sou pedreiro, pintor, engenheiro, posso ajudar na limpeza..." disabled={status === 'sending'} />
       </div>
       
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginTop: 8 }}>
-        <button type="button" onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: theme.colors.muted }}>Cancelar</button>
-        <button type="submit" disabled={status === 'sending'} style={{ padding: '10px 24px', borderRadius: 8, background: theme.colors.secondary, color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer', opacity: status === 'sending' ? 0.7 : 1 }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginTop: 8 }}>
+        <Button variant="ghost" className="text-muted" type="button" onClick={onClose}>Cancelar</Button>
+        <Button className="px-6 py-2 bg-secondary text-white" type="submit" disabled={status === 'sending'}>
           {status === 'sending' ? 'Enviando...' : 'Enviar Cadastro'}
-        </button>
+        </Button>
       </div>
     </form>
   )
@@ -238,51 +208,42 @@ const ComoAjudar: React.FC = () => {
         </section>
 
         {/* CARTÕES DE SELEÇÃO */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 20 }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           
           {/* 1. Financeiro */}
-          <div 
+          <div
             onClick={() => setActiveSection(activeSection === 'financeiro' ? null : 'financeiro')}
-            className="hover-card"
-            style={{ 
-              background: activeSection === 'financeiro' ? '#FFF9C4' : '#fff', 
-              border: `2px solid ${activeSection === 'financeiro' ? theme.colors.highlight : 'transparent'}`,
-              padding: 24, borderRadius: 16, cursor: 'pointer', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
-            }}
+            className={`hover-card p-6 rounded-2xl cursor-pointer text-center shadow-md transform transition ${activeSection === 'financeiro' ? 'bg-yellow-50 border-4 border-[#fbc046]' : 'bg-white'}`}
           >
-            <FaHandHoldingUsd size={32} color={theme.colors.highlight} style={{ marginBottom: 12 }} />
-            <h3 style={{ margin: 0, color: theme.colors.primary }}>Doar Dinheiro</h3>
-            <p style={{ fontSize: 14, color: theme.colors.text }}>Via Pix ou Transferência</p>
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-highlight text-[#532b2a]">
+              <FaHandHoldingUsd size={22} />
+            </div>
+            <h3 className="m-0 text-lg text-[#532b2a] font-bold">Doar Dinheiro</h3>
+            <p className="text-sm text-gray-600 mt-2">Via Pix ou Transferência</p>
           </div>
 
           {/* 2. Material */}
-          <div 
+          <div
             onClick={() => setActiveSection(activeSection === 'material' ? null : 'material')}
-            className="hover-card"
-            style={{ 
-              background: activeSection === 'material' ? '#FFE0B2' : '#fff', 
-              border: `2px solid ${activeSection === 'material' ? theme.colors.orangeStrong : 'transparent'}`,
-              padding: 24, borderRadius: 16, cursor: 'pointer', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
-            }}
+            className={`hover-card p-6 rounded-2xl cursor-pointer text-center shadow-md transform transition ${activeSection === 'material' ? 'bg-orange-50 border-4 border-[#e96b46]' : 'bg-white'}`}
           >
-            <FaTools size={32} color={theme.colors.orangeStrong} style={{ marginBottom: 12 }} />
-            <h3 style={{ margin: 0, color: theme.colors.primary }}>Doar Materiais</h3>
-            <p style={{ fontSize: 14, color: theme.colors.text }}>Cimento, pisos e itens de obra</p>
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-orange-strong text-white">
+              <FaTools size={22} />
+            </div>
+            <h3 className="m-0 text-lg text-[#532b2a] font-bold">Doar Materiais</h3>
+            <p className="text-sm text-gray-600 mt-2">Cimento, pisos e itens de obra</p>
           </div>
 
           {/* 3. Voluntário */}
-          <div 
+          <div
             onClick={() => setActiveSection(activeSection === 'voluntario' ? null : 'voluntario')}
-            className="hover-card"
-            style={{ 
-              background: activeSection === 'voluntario' ? '#C8E6C9' : '#fff', 
-              border: `2px solid ${activeSection === 'voluntario' ? theme.colors.secondary : 'transparent'}`,
-              padding: 24, borderRadius: 16, cursor: 'pointer', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
-            }}
+            className={`hover-card p-6 rounded-2xl cursor-pointer text-center shadow-md transform transition ${activeSection === 'voluntario' ? 'bg-green-50 border-4 border-[#678b64]' : 'bg-white'}`}
           >
-            <FaHandsHelping size={32} color={theme.colors.secondary} style={{ marginBottom: 12 }} />
-            <h3 style={{ margin: 0, color: theme.colors.primary }}>Ser Voluntário</h3>
-            <p style={{ fontSize: 14, color: theme.colors.text }}>Doe o seu tempo e talento</p>
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-secondary text-white">
+              <FaHandsHelping size={22} />
+            </div>
+            <h3 className="m-0 text-lg text-[#532b2a] font-bold">Ser Voluntário</h3>
+            <p className="text-sm text-gray-600 mt-2">Doe o seu tempo e talento</p>
           </div>
         </div>
 
@@ -290,43 +251,43 @@ const ComoAjudar: React.FC = () => {
         <div ref={contentRef} style={{ marginTop: 40 }}>
           
           {activeSection === 'financeiro' && (
-            <div style={{ background: '#fff', padding: 32, borderRadius: 16, boxShadow: '0 10px 40px rgba(0,0,0,0.08)', animation: 'fadeIn 0.4s' }}>
-              <h2 style={{ textAlign: 'center', color: theme.colors.primary, marginTop: 0 }}>Dados para Doação</h2>
-              <p style={{ textAlign: 'center', marginBottom: 30, color: theme.colors.muted }}>Use a chave Pix (CNPJ) ou os dados da conta bancária.</p>
+            <div className="animate-fade-up bg-white p-8 rounded-2xl shadow-lg">
+              <h2 className="text-center text-2xl font-bold text-[#532b2a]">Dados para Doação</h2>
+              <p className="text-center text-sm text-gray-600 mb-6">Use a chave Pix (CNPJ) ou os dados da conta bancária.</p>
               
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 30 }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 {/* Opção PIX */}
-                <div style={{ background: '#FAFAFA', padding: 20, borderRadius: 12, border: `1px solid ${theme.colors.highlight}` }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                    <FaCopy size={24} color={theme.colors.highlight} />
-                    <h3 style={{ margin: 0, color: theme.colors.primary }}>Chave Pix (CNPJ)</h3>
+                <div className="bg-gray-50 p-5 rounded-lg border border-yellow-100">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-highlight text-[#532b2a]"><FaCopy size={16} /></div>
+                    <h3 className="text-lg font-semibold text-[#532b2a]">Chave Pix (CNPJ)</h3>
                   </div>
-                  
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#fff', padding: '12px', borderRadius: 8, border: '1px solid #eee' }}>
-                    <code style={{ flex: 1, fontSize: 18, fontWeight: 700, color: theme.colors.text }}>{pixKey}</code>
+
+                  <div className="flex items-center gap-3 bg-white p-3 rounded-md border border-gray-100">
+                    <code className="flex-1 text-lg font-extrabold text-gray-800">{pixKey}</code>
                     <CopyButton textToCopy={pixKey} label="Copiar" />
                   </div>
-                  <p style={{ fontSize: 14, color: theme.colors.muted, marginTop: 12 }}>Titular: Instituto João de Barros</p>
+                  <p className="text-sm text-gray-500 mt-3">Titular: Instituto João de Barros</p>
                 </div>
 
                 {/* Opção Transferência */}
-                <div style={{ background: '#FAFAFA', padding: 20, borderRadius: 12, border: '1px solid #ddd' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                    <FaUniversity size={24} color={theme.colors.primary} />
-                    <h3 style={{ margin: 0, color: theme.colors.primary }}>Transferência (TED/DOC)</h3>
+                <div className="bg-gray-50 p-5 rounded-lg border border-gray-100">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#532b2a] text-white"><FaUniversity size={16} /></div>
+                    <h3 className="text-lg font-semibold text-[#532b2a]">Transferência (TED/DOC)</h3>
                   </div>
-                  
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee', paddingBottom: 8 }}>
+
+                  <ul className="space-y-3">
+                    <li className="flex justify-between items-center border-b border-gray-100 pb-2"> 
                       <span>Banco Sicoob (756)</span>
                       <CopyButton textToCopy={'756'} label="Copiar" />
                     </li>
-                    <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee', paddingBottom: 8 }}>
+                    <li className="flex justify-between items-center border-b border-gray-100 pb-2"> 
                       <span>Agência: <strong>4321</strong></span>
                       <CopyButton textToCopy={'4321'} label="Copiar" />
                     </li>
-                    <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee', paddingBottom: 8 }}>
+                    <li className="flex justify-between items-center"> 
                       <span>Conta: <strong>2005247-2</strong></span>
                       <CopyButton textToCopy={'2005247-2'} label="Copiar" />
                     </li>
@@ -338,17 +299,17 @@ const ComoAjudar: React.FC = () => {
           )}
 
           {activeSection === 'material' && (
-            <div style={{ background: '#fff', padding: 32, borderRadius: 16, borderTop: `6px solid ${theme.colors.orangeStrong}`, boxShadow: '0 10px 40px rgba(0,0,0,0.08)', animation: 'fadeIn 0.4s' }}>
-              <h2 style={{ color: theme.colors.orangeStrong, marginTop: 0 }}>O que precisamos?</h2>
-              <p style={{ marginBottom: 24 }}>No momento, nossas maiores necessidades são <strong>cimento, areia e revestimentos</strong>. Se tiver sobras de obra em bom estado, também aceitamos!</p>
+            <div className="animate-fade-up bg-white p-8 rounded-2xl border-t-4 border-[#e96b46] shadow-lg">
+              <h2 className="text-2xl font-bold text-[#e96b46]">O que precisamos?</h2>
+              <p className="mb-6 text-gray-700">No momento, nossas maiores necessidades são <strong>cimento, areia e revestimentos</strong>. Se tiver sobras de obra em bom estado, também aceitamos!</p>
               <MaterialForm onClose={() => setActiveSection(null)} />
             </div>
           )}
 
           {activeSection === 'voluntario' && (
-            <div style={{ background: '#fff', padding: 32, borderRadius: 16, borderTop: `6px solid ${theme.colors.secondary}`, boxShadow: '0 10px 40px rgba(0,0,0,0.08)', animation: 'fadeIn 0.4s' }}>
-              <h2 style={{ color: theme.colors.secondary, marginTop: 0 }}>Cadastro de Voluntário</h2>
-              <p style={{ marginBottom: 24 }}>Precisamos de todo o tipo de ajuda: desde mão de obra especializada (engenharia, pedreiro) até apoio em eventos e transporte.</p>
+            <div className="animate-fade-up bg-white p-8 rounded-2xl border-t-4 border-[#678b64] shadow-lg">
+              <h2 className="text-2xl font-bold text-[#678b64]">Cadastro de Voluntário</h2>
+              <p className="mb-6 text-gray-700">Precisamos de todo o tipo de ajuda: desde mão de obra especializada (engenharia, pedreiro) até apoio em eventos e transporte.</p>
               <VoluntarioForm onClose={() => setActiveSection(null)} />
             </div>
           )}
@@ -359,9 +320,9 @@ const ComoAjudar: React.FC = () => {
         <div style={{ marginTop: 60, textAlign: 'center', borderTop: '1px solid #eee', paddingTop: 40 }}>
           <p style={{ marginBottom: 16 }}>Dúvidas? Fale conosco diretamente.</p>
           <a href="https://wa.me/5516991811811" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
-            <button style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 30, background: '#25D366', color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer' }}>
+            <Button className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#25D366] text-white">
               <FaWhatsapp size={18} /> WhatsApp Oficial
-            </button>
+            </Button>
           </a>
         </div>
 
