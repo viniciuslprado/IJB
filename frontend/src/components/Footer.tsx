@@ -47,31 +47,20 @@ const Footer: React.FC = () => {
             <h4 className="text-[#fbc046] font-bold uppercase text-sm tracking-wider mb-1">Contato</h4>
             <div className="flex items-center gap-2 text-white/80 text-sm">
               <FaPhone className="text-[#fbc046]" />
-              <span>(16) 99181-1811</span>
-            </div>
-            <div className="flex items-center gap-2 text-white/80 text-sm">
-              <FaEnvelope className="text-[#fbc046]" />
-              <a href="mailto:ijbfranca@gmail.com" className="hover:text-white">ijbfranca@gmail.com</a>
-            </div>
-            <a href="https://www.instagram.com/instituto_joaodebarro_franca/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-3 bg-white/10 px-4 py-2 rounded-full text-sm hover:bg-white/20 transition-colors w-fit text-white">
-              <FaInstagram className="text-[#fbc046]" />
-              <span>@instituto_...</span>
-            </a>
-          </div>
+              import React from 'react'
 
-        </div>
-      </div>
+              const Footer: React.FC = () => {
+                return (
+                  <footer className="bg-[#532b2a] text-white mt-12 border-t-4 border-[#be5838]" aria-label="rodape">
+                    <div className="w-full">
+                      <div className="max-w-6xl mx-auto px-5 py-4 flex flex-row justify-between items-center text-sm">
+                        <span className="text-white">© {new Date().getFullYear()} Inst. João de Barros</span>
+                        <span className="font-mono text-white">CNPJ: 26.345.732/0001-07</span>
+                      </div>
+                    </div>
+                  </footer>
+                )
+              }
 
-      {/* Bottom bar - always visible. Mobile: stacked center; Desktop: single row justify-between */}
+              export default Footer
       <div className="w-full border-t border-white/10">
-        <div className="max-w-6xl mx-auto px-5 py-6 flex flex-row justify-between items-center text-sm gap-2">
-          <span className="text-white text-sm">© {new Date().getFullYear()} Inst. João de Barros</span>
-          <span className="font-mono text-white text-sm">CNPJ: 26.345.732/0001-07</span>
-        </div>
-      </div>
-
-    </footer>
-  )
-}
-
-export default Footer
