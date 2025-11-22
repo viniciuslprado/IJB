@@ -1,24 +1,14 @@
 import React from 'react'
-import { theme } from '../../styles/theme'
-
 type BotaoCTAProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: React.ReactNode
 }
 
-export const BotaoCTA: React.FC<BotaoCTAProps> = ({ children = 'DOE AGORA', ...props }) => {
+export const BotaoCTA: React.FC<BotaoCTAProps> = ({ children = 'DOE AGORA', className = '', ...props }) => {
+  const base = 'bg-highlight text-black font-bold rounded-lg px-4 py-2 shadow-md inline-flex items-center justify-center';
   return (
     <button
       {...props}
-      style={{
-        background: theme.colors.highlight || '#fbc046',
-        color: '#000',
-        border: 'none',
-        padding: '10px 18px',
-        borderRadius: '10px',
-        fontWeight: 700,
-        cursor: 'pointer',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.12)'
-      }}
+      className={`${base} ${className}`}
     >
       {children}
     </button>
