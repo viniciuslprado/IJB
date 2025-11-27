@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
             <Link to="/">Home</Link>
             <Link to="/sobre">Quem Somos</Link>
             <Link to="/projetos">Projetos</Link>
-            <Link to="/ajudar">Como Ajudar</Link>
+            <Link to="/como-ajudar">Como Ajudar</Link>
             <div style={{ marginLeft: 8 }}>
               {/* Botão sempre visível e em destaque */}
               <BotaoCTA onClick={() => setDonateOpen(true)}>DOE AGORA</BotaoCTA>
