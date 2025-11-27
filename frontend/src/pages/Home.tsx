@@ -134,12 +134,12 @@ const Home: React.FC = () => {
             <p style={{ color: theme.colors.text, marginTop: 12, flex: 1 }}>
               Cimento, revestimentos, portas e itens de construção são essenciais para nossas obras.
             </p>
-            <a href="/ajudar?type=material#doacoes" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
+            <a href="/ajudar?type=material" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
               <button style={{
                 width: '100%',
                 padding: '10px',
                 background: 'transparent',
-                border: `2px solid ${theme.colors.orangeStrong}`, // Borda colorida
+                border: `2px solid ${theme.colors.orangeStrong}`,
                 color: theme.colors.orangeStrong,
                 borderRadius: 8,
                 fontWeight: 700,
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
             <p style={{ color: theme.colors.text, marginTop: 12, flex: 1 }}>
               Mãos à obra: profissionais e ajudantes são a força que move as nossas reformas.
             </p>
-            <a href="/ajudar?type=voluntario#doacoes" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
+            <a href="/ajudar?type=voluntario" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
               <button style={{
                 width: '100%',
                 padding: '10px',
@@ -186,8 +186,8 @@ const Home: React.FC = () => {
             <p style={{ color: theme.colors.text, marginTop: 12, flex: 1 }}>
               Contribua financeiramente para apoiar nossas obras e ações sociais.
             </p>
-            <div style={{ marginTop: 16, width: '100%' }}>
-              <button onClick={() => setDonateOpen(true)} style={{
+            <a href="/ajudar?type=financeiro" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
+              <button style={{
                 width: '100%',
                 padding: '10px',
                 background: 'transparent',
@@ -200,7 +200,7 @@ const Home: React.FC = () => {
               }}>
                 Doar agora <FaArrowRight size={12} />
               </button>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -215,7 +215,7 @@ const Home: React.FC = () => {
             </div>
             <p style={{ marginTop: 8, color: theme.colors.text }}>Obras e melhorias habitacionais para famílias em vulnerabilidade.</p>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <a href="/projetos#obras" style={{ textDecoration: 'none' }}>
+              <a href="/projetos" style={{ textDecoration: 'none' }}>
                 <button style={{ padding: '8px 12px', borderRadius: 8, background: 'transparent', color: theme.colors.brownWarm, border: `1px solid ${theme.colors.brownWarm}`, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
                   Saiba mais <FaArrowRight size={12} />
                 </button>
