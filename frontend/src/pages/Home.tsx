@@ -4,7 +4,7 @@ import { theme } from '../styles/theme'
 import BotaoCTA from '../components/ui/BotaoCTA'
 import DonationModal from '../components/ui/DonationModal'
 import Carousel from '../components/ui/Carousel'
-import { FaBoxOpen, FaArrowRight, FaHandHoldingHeart, FaCalendarAlt, FaHome, FaHandshake, FaGlassCheers } from 'react-icons/fa'
+import { FaBoxOpen, FaArrowRight, FaHandHoldingHeart, FaCalendarAlt, FaHome , FaGlassCheers } from 'react-icons/fa'
 
 // heroStyle removed (unused) — estilos aplicados inline onde necessário
 
@@ -240,13 +240,13 @@ const Home: React.FC = () => {
 
           <article className="hover-card" style={{ background: '#fff', padding: 16, borderRadius: theme.radii.soft, boxShadow: '0 6px 18px rgba(0,0,0,0.04)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ fontSize: 28, color: theme.colors.brownWarm }}><FaHandshake /></div>
-              <h3 style={{ margin: 0, color: theme.colors.primary }}>Parcerias</h3>
+              <div style={{ fontSize: 28, color: theme.colors.primary }}><FaArrowRight /></div>
+              <h3 style={{ margin: 0, color: theme.colors.primary }}>Conheça nossa história</h3>
             </div>
-            <p style={{ marginTop: 8, color: theme.colors.text }}>Parcerias com empresas para doação de materiais e serviços.</p>
+            <p style={{ marginTop: 8, color: theme.colors.text }}>Saiba mais sobre a missão, valores e trajetória do Instituto João de Barros.</p>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <a href="/ajudar#doacoes" style={{ textDecoration: 'none' }}>
-                <button style={{ padding: '8px 12px', borderRadius: 8, background: 'transparent', color: theme.colors.brownWarm, border: `1px solid ${theme.colors.brownWarm}`, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <a href="/sobre" style={{ textDecoration: 'none' }}>
+                <button style={{ padding: '8px 12px', borderRadius: 8, background: 'transparent', color: theme.colors.primary, border: `1px solid ${theme.colors.primary}`, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
                   Saiba mais <FaArrowRight size={12} />
                 </button>
               </a>
