@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { theme } from '../styles/theme'
 import BotaoCTA from '../components/ui/BotaoCTA'
@@ -215,11 +216,11 @@ const Home: React.FC = () => {
             </div>
             <p style={{ marginTop: 8, color: theme.colors.text }}>Obras e melhorias habitacionais para famílias em vulnerabilidade.</p>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <a href="/projetos" style={{ textDecoration: 'none' }}>
+              <Link to="/projetos" style={{ textDecoration: 'none' }}>
                 <button style={{ padding: '8px 12px', borderRadius: 8, background: 'transparent', color: theme.colors.brownWarm, border: `1px solid ${theme.colors.brownWarm}`, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
                   Saiba mais <FaArrowRight size={12} />
                 </button>
-              </a>
+              </Link>
             </div>
           </article>
 
@@ -245,11 +246,11 @@ const Home: React.FC = () => {
             </div>
             <p style={{ marginTop: 8, color: theme.colors.text }}>Saiba mais sobre a missão, valores e trajetória do Instituto João de Barros.</p>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <a href="/sobre" style={{ textDecoration: 'none' }}>
+              <Link to="/sobre" style={{ textDecoration: 'none' }}>
                 <button style={{ padding: '8px 12px', borderRadius: 8, background: 'transparent', color: theme.colors.primary, border: `1px solid ${theme.colors.primary}`, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
                   Saiba mais <FaArrowRight size={12} />
                 </button>
-              </a>
+              </Link>
             </div>
           </article>
         </div>

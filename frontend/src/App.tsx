@@ -21,7 +21,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/projetos" element={<Projetos />} />
-          <Route path="/ajudar" element={<ComoAjudar />} />
+          <Route path="/como-ajudar" element={<ComoAjudar />} />
           {/* Rota Catch-all para 404 */}
           <Route path="*" element={<NotFound />} />
             {/* <Route path="/obras" element={<ObrasRealizadas />} /> */}
