@@ -134,7 +134,7 @@ const Home: React.FC = () => {
             <p style={{ color: theme.colors.text, marginTop: 12, flex: 1 }}>
               Cimento, revestimentos, portas e itens de construção são essenciais para nossas obras.
             </p>
-            <a href="/ajudar?type=material" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
+            <a href="/como-ajudar?type=material" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
               <button style={{
                 width: '100%',
                 padding: '10px',
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
             <p style={{ color: theme.colors.text, marginTop: 12, flex: 1 }}>
               Mãos à obra: profissionais e ajudantes são a força que move as nossas reformas.
             </p>
-            <a href="/ajudar?type=voluntario" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
+            <a href="/como-ajudar?type=voluntario" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
               <button style={{
                 width: '100%',
                 padding: '10px',
@@ -186,7 +186,7 @@ const Home: React.FC = () => {
             <p style={{ color: theme.colors.text, marginTop: 12, flex: 1 }}>
               Contribua financeiramente para apoiar nossas obras e ações sociais.
             </p>
-            <a href="/ajudar?type=financeiro" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
+            <a href="/como-ajudar?type=financeiro" style={{ textDecoration: 'none', marginTop: 16, width: '100%' }}>
               <button style={{
                 width: '100%',
                 padding: '10px',
